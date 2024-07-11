@@ -1,6 +1,6 @@
 
 # Chicken-Sandwich-Ranker
-=======
+
 This was initially a college project I had made. I decided to expand upon it and then upload it here.
 
 This project has the following features:
