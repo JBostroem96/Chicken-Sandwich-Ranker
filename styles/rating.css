@@ -1,0 +1,12 @@
+.rating {
+
+    border: 2px solid #ff6300;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    
+}
+
+.rating p {
+
+    color: #ff6300;
+}
