@@ -1,0 +1,12 @@
+#userInfo tr {
+
+    border: 1px solid #ff6300;
+    border-radius: 1rem;
+    
+}
+
+#userInfo td, th {
+
+    padding: 1rem;
+}
+

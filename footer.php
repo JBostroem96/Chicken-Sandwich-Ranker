@@ -1,0 +1,1 @@
+<footer class="fw-bold p-5 text-white text-center mt-5 fixed-bottom">Jbostroem@madisoncollege.edu</footer>   
