@@ -19,7 +19,7 @@ A user has their own profile, being able to view their user name, account creati
 A user can edit their password. This requires them to re-enter their password, and there is validation in place.<br>
 A user can delete their profile.<br>
 A user can edit and delete their own ratings, affecting the score of the rated chicken sandwiches.<br>
-Updating an item's score should be present wherever it logically makes sense, either due to the deletion of ratings, or a user editing their own rating.<br>
+Updating an item's score should be present wherever it logically makes sense. For example, either due to the deletion of ratings, or a user editing their own rating.<br>
 
 This is currently only a local project.
 
