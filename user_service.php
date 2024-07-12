@@ -38,7 +38,7 @@ switch ($http_verb) {
             //Read use
             $user_manager->readById($_SESSION['id']);
         
-        //if the user clicks edit password
+        //if the user's password is being edited
         } elseif (isset($_POST['edit_password'])) {
 
             //If the log in is successful ...

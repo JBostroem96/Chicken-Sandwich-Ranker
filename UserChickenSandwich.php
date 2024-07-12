@@ -2,12 +2,33 @@
         
         class UserChickenSandwich {
 
+            private $id;
             private $chicken_id;
             private $user_id;
-            private $rated;
             private $score;
             private $name;
            
+            
+
+            /**
+             * Get the value of id
+             */ 
+            public function getId()
+            {
+                        return $this->id;
+            }
+
+            /**
+             * Set the value of id
+             *
+             * @return  self
+             */ 
+            public function setId($id)
+            {
+                        $this->id = $id;
+
+                        return $this;
+            }
             
             /**
              * Get the value of chicken
@@ -45,26 +66,6 @@
             public function setUser_id($user_id)
             {
                         $this->user_id = $user_id;
-
-                        return $this;
-            }
-
-            /**
-             * Get the value of rated
-             */ 
-            public function getRated()
-            {
-                        return $this->rated;
-            }
-
-            /**
-             * Set the value of rated
-             *
-             * @return  self
-             */ 
-            public function setRated($rated)
-            {
-                        $this->rated = $rated;
 
                         return $this;
             }
