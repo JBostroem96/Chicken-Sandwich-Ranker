@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
 require_once('pagetitles.php');
 $page_title = MR_USER_PAGE;
 

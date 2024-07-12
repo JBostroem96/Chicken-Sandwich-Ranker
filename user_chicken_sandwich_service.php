@@ -1,6 +1,7 @@
  
 <?php
-    session_start();
+    
+    require_once('authorizeaccess_user.php');
     require_once('UserChickenSandwichManager.php');
     require_once('ChickenSandwichManager.php');
 

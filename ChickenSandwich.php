@@ -1,8 +1,8 @@
 
 
 <?php
-        /**
-         * This class' purpose is to represent a chicken sandwich object */        
+    /**
+    * This class' purpose is to represent a chicken sandwich object */        
         class ChickenSandwich {
 
             private $id;
@@ -195,14 +195,9 @@
                         return $this;
             }
             
-        }
-                
-            ?>
+        }            
+?>
 
-    
-        <?php require_once("footer.php"); ?>
-    </body>
-</html>
 
     
     

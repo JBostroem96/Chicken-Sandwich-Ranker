@@ -58,7 +58,7 @@
 			
 			//If the admin edits a sandwich ...	
 			} elseif (isset($_POST['edit_chicken'])) {
-
+				
 				//Bring up the form
 				require_once('form.php');
 				
@@ -80,7 +80,7 @@
 
 			} else {
 
-
+				
 				throw new Exception("Invalid HTTP POST request parameters.");
 
 			}
@@ -118,12 +118,15 @@
 
 									$chicken_sandwich_manager->displayChickenSandwich($chicken_data->getId());
 								}
+
+								break;
 						}
                     }
 
 				} else {
 
-					throw new Exception("Invalid HTTP GET request parameters.");
+					header("Location: index.php");
+        			exit();
 				}
 	
 				break;

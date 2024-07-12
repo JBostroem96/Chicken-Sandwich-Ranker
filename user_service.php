@@ -1,10 +1,12 @@
  
 <?php
 
+require_once('authorizeaccess_user.php');
 require_once('UserManager.php');
 require_once('User.php');
 require_once('UserChickenSandwichManager.php');
 require_once('ChickenSandwichManager.php');
+
 
 
 $http_verb = $_SERVER['REQUEST_METHOD'];
@@ -30,11 +32,7 @@ switch ($http_verb) {
             //Delete user
             $user_manager->delete($_SESSION['id']);
 
-            //log out
-            session_destroy();
-
-            //Redirect user to the home page
-            header("Location: index.php");
+            require_once('logout.php');
         
         //If the user clicks on edit password
         } elseif(isset($_POST['edit_user'])) {

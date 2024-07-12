@@ -62,9 +62,7 @@
                             ?>
                     </form>
                    
-                        </div>
-                    </div>
-                </main>
+        </main>
         
         <?php require_once("footer.php"); ?>        
     </body>   

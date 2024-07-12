@@ -10,6 +10,7 @@ require_once('DB.php');
 class UserChickenSandwichManager {
 
     private $db;
+    private const CLASS_USER_CHICKEN_SANDWICH = 'UserChickenSandwich';
 
     //this function's purpose is to be the constructor of this class and connect to the database
     public function __construct() {
@@ -21,14 +22,14 @@ class UserChickenSandwichManager {
     public function readAll($user_id) {
 
         $sql = "SELECT * FROM user_chicken WHERE user_id=:user_id";
-        return $this->executeQuery($sql, [':user_id' => $user_id], 'UserChickenSandwich');
+        return $this->executeQuery($sql, [':user_id' => $user_id], CLASS_USER_CHICKEN_SANDWICH);
     }
 
     //this function's purpose is to read a user's entry by id
     public function readById($user_id, $chicken_id) {
 
         $sql = "SELECT * FROM user_chicken WHERE user_id=:user_id AND chicken_id=:chicken_id";
-        return $this->executeQuery($sql, [':user_id' => $user_id, ':chicken_id' => $chicken_id], 'UserChickenSandwich');
+        return $this->executeQuery($sql, [':user_id' => $user_id, ':chicken_id' => $chicken_id], CLASS_USER_CHICKEN_SANDWICH);
     }
 
     //this function's purpose is to display a user's ratings
@@ -58,7 +59,7 @@ class UserChickenSandwichManager {
 
         $sql = "UPDATE chicken SET score=:score, average=:average WHERE id=:id";
         $params = [':id' => $chicken->getId(), ':score' => $currentTotalScore, ':average' => $new_average];
-        $this->executeNonQuery($sql, $params);
+        $this->executeQuery($sql, $params);
 
         $this->displayUserChicken($this->readAll($user_id));
     }
@@ -68,7 +69,7 @@ class UserChickenSandwichManager {
 
         $sql = "UPDATE user_chicken SET score=:score WHERE user_id=:user_id AND chicken_id=:chicken_id";
         $params = [':chicken_id' => $chicken_id, ':user_id' => $user_id, ':score' => $new_score];
-        $this->executeNonQuery($sql, $params);
+        $this->executeQuery($sql, $params);
     }
 
     //this function's purpose is to update the chicken sandwich name for users
@@ -76,7 +77,7 @@ class UserChickenSandwichManager {
 
         $sql = "UPDATE user_chicken SET name=:name WHERE chicken_id=:chicken_id";
         $params = [':chicken_id' => $chicken_id, ':name' => $name];
-        $this->executeNonQuery($sql, $params);
+        $this->executeQuery($sql, $params);
     }
 
     //this function's purpose is to see if the user has already submitted a rating
@@ -94,9 +95,8 @@ class UserChickenSandwichManager {
     public function getChickenSandwichScore($user_id, $chicken_id) {
 
         $chicken = $this->readById($user_id, $chicken_id);
-
-		//if the chicken is not empty, return the first item's score; otherwise, return null
-        return !empty($chicken) ? $chicken[0]->getScore() : null;
+		
+        return $chicken[0]->getScore();
     }
 
 	// This function's purpose is to update the score on user chicken deletion
@@ -106,19 +106,12 @@ class UserChickenSandwichManager {
         --$entries; 
 		$chicken_score = $chicken->getScore() - $score; 
 
-		if ($entries > 0) {
-
-			$average = $chicken_score / $entries;
-
-		} else {
-
-			$average = 0;
-		}
+		$entries > 0 ? $average = $chicken_score / $entries : $average = 0;   
 
 		$sql = "UPDATE chicken SET score=:score, average=:average, entries=:entries WHERE id=:id";
 		$params = [':id' => $chicken->getId(), ':score' => $chicken_score, ':average' => $average, ':entries' => $entries];
 
-		$this->executeNonQuery($sql, $params);
+		$this->executeQuery($sql, $params);
 
 		$this->displayUserChicken($this->readAll($user_id));
 	}
@@ -129,7 +122,7 @@ class UserChickenSandwichManager {
 
         $sql = "DELETE FROM user_chicken WHERE user_id=:user_id AND chicken_id=:chicken_id";
         $params = [':user_id' => $user_id, ':chicken_id' => $chicken_id];
-        $this->executeNonQuery($sql, $params);
+        $this->executeQuery($sql, $params);
     }
 
     // this function's purpose is to insert the user rating for a given chicken sandwich
@@ -137,7 +130,7 @@ class UserChickenSandwichManager {
 
         $sql = "INSERT INTO user_chicken (user_id, chicken_id, score, name) VALUES (:user, :chicken, :score, :name)";
         $params = [':user' => $user_id, ':chicken' => $chicken_id, ':score' => $score, ':name' => $name];
-        $this->executeNonQuery($sql, $params);
+        $this->executeQuery($sql, $params);
 
         return $chicken_id;
     }
@@ -150,21 +143,6 @@ class UserChickenSandwichManager {
             $query = $this->db->prepare($sql);
             $query->execute($params);
             return $class ? $query->fetchAll(PDO::FETCH_CLASS, $class) : $query->fetchAll();
-
-        } catch (Exception $ex) {
-
-            echo "{$ex->getMessage()}<br/>\n";
-            return false;
-        }
-    }
-
-    // this function's purpose is to execute the non-query (e.g., update, delete, insert)
-    private function executeNonQuery($sql, $params = []) {
-
-        try {
-
-            $query = $this->db->prepare($sql);
-            $query->execute($params);
 
         } catch (Exception $ex) {
 
