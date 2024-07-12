@@ -22,14 +22,14 @@ class UserChickenSandwichManager {
     public function readAll($user_id) {
 
         $sql = "SELECT * FROM user_chicken WHERE user_id=:user_id";
-        return $this->executeQuery($sql, [':user_id' => $user_id], CLASS_USER_CHICKEN_SANDWICH);
+        return $this->executeQuery($sql, [':user_id' => $user_id], self::CLASS_USER_CHICKEN_SANDWICH);
     }
 
     //this function's purpose is to read a user's entry by id
     public function readById($user_id, $chicken_id) {
 
         $sql = "SELECT * FROM user_chicken WHERE user_id=:user_id AND chicken_id=:chicken_id";
-        return $this->executeQuery($sql, [':user_id' => $user_id, ':chicken_id' => $chicken_id], CLASS_USER_CHICKEN_SANDWICH);
+        return $this->executeQuery($sql, [':user_id' => $user_id, ':chicken_id' => $chicken_id], self::CLASS_USER_CHICKEN_SANDWICH);
     }
 
     //this function's purpose is to display a user's ratings

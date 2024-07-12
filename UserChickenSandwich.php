@@ -134,9 +134,7 @@
                             name='delete_entry' value='{$chicken_sandwich->getScore()}'>DELETE</button>"
                             . "<button class='button' type='submit' id='edit_entry'
                             name='edit_entry'>EDIT</button></form></div></div>";
-                    }
-                        
-                    
+                    }   
             }
 
         }

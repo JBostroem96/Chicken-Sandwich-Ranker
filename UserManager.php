@@ -6,6 +6,7 @@ require_once('DB.php');
 class UserManager {
 
     private $db;
+    private const CLASS_USER = 'User';
 
 	//This function's purpose is to be the constructor, which connects to the DB
     public function __construct() {
@@ -32,16 +33,16 @@ class UserManager {
     public function readAll() {
 
         $sql = "SELECT * FROM user";
-        return $this->executeQuery($sql, [], 'User');
+        return $this->executeQuery($sql, [], self::CLASS_USER);
     }
 
     //This function's purpose is to read the entry by id
     public function readById($id) {
 
         $sql = "SELECT * FROM user WHERE id = :id";
-        $results = $this->executeQuery($sql, [':id' => $id], 'User');
+        $results = $this->executeQuery($sql, [':id' => $id], self::CLASS_USER);
         $this->displayUser($results);
-        return $results;
+        
     }
 
     //This function's purpose is to display the user
@@ -69,7 +70,7 @@ class UserManager {
 
         $results = $this->authenticate($username);
 
-        if ($results && count($results) === 1) {
+        if (count($results) === 1) {
 
             foreach ($results as $row) {
 
