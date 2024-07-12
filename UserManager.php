@@ -96,8 +96,6 @@ class UserManager {
 
             echo "<h3><p class='text-danger'>Something went wrong!</p></h3></hr>";
         }
-
-        return false;
     }
 
     //This function's purpose is to sign the user up

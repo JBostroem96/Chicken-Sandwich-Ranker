@@ -36,7 +36,6 @@ class ChickenSandwichManager {
         } catch (Exception $ex) {
 
             echo "{$ex->getMessage()}<br/>\n";
-            return false;
         }
     }
 
@@ -158,7 +157,6 @@ class ChickenSandwichManager {
         if ($this->validateChickenSandwich($name)) {
 
             echo "Chicken sandwich with this name already exists.";
-            return;
         }
 
         $this->validateImages();

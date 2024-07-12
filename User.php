@@ -1,10 +1,10 @@
 <?php 
 
-require_once('pagetitles.php');
-$page_title = MR_USER_PAGE;
+    require_once('pagetitles.php');
+    $page_title = MR_USER_PAGE;
 
-require_once('headings.php');
-$heading = MR_USER_HEADING;
+    require_once('headings.php');
+    $heading = MR_USER_HEADING;
 ?>
 
 <!DOCTYPE html>

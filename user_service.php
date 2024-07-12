@@ -7,8 +7,6 @@ require_once('User.php');
 require_once('UserChickenSandwichManager.php');
 require_once('ChickenSandwichManager.php');
 
-
-
 $http_verb = $_SERVER['REQUEST_METHOD'];
 $user_manager = new UserManager();
 $user_chicken_sandwich_manager = new UserChickenSandwichManager();
