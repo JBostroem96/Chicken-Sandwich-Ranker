@@ -47,7 +47,7 @@
                         } else {
 
                             echo "<li class='nav-item'><a class='nav-link text-white' href='signup.php'>Sign Up</a>";
-                            echo "<li class='nav-item'><a class='nav-link text-white' href='index.php'>Log In</a>";  
+                            echo "<li class='nav-item'><a class='nav-link text-white' href='login.php'>Log In</a>";  
                         }
                     ?>
                                         

@@ -7,8 +7,6 @@
             private $user_id;
             private $score;
             private $name;
-           
-            
 
             /**
              * Get the value of id
@@ -109,7 +107,6 @@
 
                         return $this;
             }
-
         }
                 
 ?>

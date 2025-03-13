@@ -185,6 +185,8 @@
                                 name="edit_password">EDIT
                             </button>
                     </form>
+                </main>
+                
                     <?php
 
                 }
@@ -195,6 +197,7 @@
                     ?>
 
         <?php require_once("footer.php"); ?>
+        
     </body>
 </html>
 
