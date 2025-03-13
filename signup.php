@@ -41,7 +41,7 @@
                                     id="user_name" name="user_name"
                                     placeholder="Enter a user name" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid user name.
+                                    Please provide a valid user name
                                 </div>
                             </div>
                         </div>

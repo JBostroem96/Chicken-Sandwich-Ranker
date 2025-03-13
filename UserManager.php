@@ -90,7 +90,7 @@ class UserManager {
 
         } elseif (empty($results)) {
 
-            echo "<h3><p class='text-danger'>That user does not exist.</p></h3></hr>";
+            echo "<h3><p class='text-danger'>That user does not exist</p></h3></hr>";
 
         } else {
 
@@ -110,15 +110,15 @@ class UserManager {
             $this->executeQuery($sql, [':username' => $username, ':password' => $salted_hashed_password]);
 
             echo "<h4><p class='text-success'>Thank you for signing up <strong>$username</strong>! "
-                . "Your new account has been successfully created.<br/>"
-                . "You're now ready to <a href='index.php'>log in</a>.</p></h4>";
+                . "Your new account has been successfully created<br/>"
+                . "You're now ready to <a href='index.php'>log in</a></p></h4>";
 
             $show_sign_up_form = false;
 
         } else {
 
             echo "<h4><p class='text-danger'>An account already exists for this username: "
-                . "<span class='font-weight-bold'> ($username)</span>. "
+                . "<span class='font-weight-bold'>($username)</span>. "
                 . "Please use a different user name.</p></h4></hr>";
         }
     }

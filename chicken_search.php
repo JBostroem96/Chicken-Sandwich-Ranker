@@ -59,7 +59,7 @@
                                 <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
                                 <?php
                             }
-                            ?>
+                                ?>
                     </form>
                    
         </main>

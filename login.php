@@ -18,7 +18,7 @@
         
                 if (empty($_SESSION['id'])) {
 
-                    echo "<h1>Log in to change your chicken!</h1>";
+                    echo "<h1 class='text-center'>Log in</h1>";
                 }
               
                 if (empty($_SESSION['id']) && isset($_POST['login'])) {
@@ -46,7 +46,7 @@
                                     id="user_name" name="user_name"
                                     placeholder="Enter a user name" required>
                                 <div class="invalid-feedback">
-                                    Please provide a valid user name.
+                                    Please provide a valid user name
                                 </div>
                             </div>
                         </div>
@@ -59,8 +59,6 @@
                                         placeholder="Enter a password" required>
                                 <div class="form-group form-check">
                                     <input type="checkbox"
-                                        class="form-check-input"
-                                        id="show_password-check"
                                         onclick="togglePassword()">
                                     <label class="form-check-label"
                                         for="show_password_check">Show Password</label>
@@ -71,7 +69,7 @@
                             </div>
                         </div>
                         <button type="submit"
-                                name="login">Log In
+                            name="login">Log In
                         </button>
                         <br>
                         <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
