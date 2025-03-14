@@ -34,6 +34,7 @@ switch ($http_verb) {
             
             $score = $_POST['score'];
 
+            //Validates that the submitted score is an int and that its score is between 1 and 10
             if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
 
                 $current_score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);

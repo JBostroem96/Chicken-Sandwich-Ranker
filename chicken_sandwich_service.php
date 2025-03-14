@@ -20,6 +20,7 @@
 				
 				$score = $_POST['score'];
 				
+				//Validates that the submitted score is an int and that its score is between 1 and 10
 				if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
 
 					//if the user has not rated this yet ...
