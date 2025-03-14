@@ -32,12 +32,14 @@ switch ($http_verb) {
         //If the user clicks the edit score button
         } elseif (isset($_POST['edit_score'])) {
             
-            if ($_POST['score'] >= 1 && $_POST['score'] <= 10) {
+            $score = $_POST['score'];
 
-                $score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);
+            if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
+
+                $current_score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);
                 $chicken = $chicken_sandwich_manager->getChickenSandwich($_POST['edit_score']);
                 $user_chicken_sandwich_manager->updateUserScore($_SESSION['id'], $chicken->getId(), $_POST['score']);
-                $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken, $_POST['score'], $score);
+                $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken, $_POST['score'], $current_score);
 
             } else {
 

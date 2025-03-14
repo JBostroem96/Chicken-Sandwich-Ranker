@@ -18,13 +18,14 @@
 			//If a new score is submitted ...
 			if (isset($_POST['submit_score'])) {
 				
-				if ($_POST['score'] >= 1 && $_POST['score'] <= 10) {
+				$score = $_POST['score'];
+				
+				if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
 
 					//if the user has not rated this yet ...
 					if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
 
 						$chicken_id = $_POST['id'];
-						$score = $_POST['score'];
 						$name = $_POST['submit_score'];
 
 						$user_chicken_sandwich_manager->setRating($_SESSION['id'], $chicken_id, $score, $name);

@@ -43,7 +43,7 @@
                                 <input type='hidden' name='id' value='{$chicken_sandwich->getId()}'>
                                 <input type='numeric' name='score' pattern='[1-9]|10' required>
                                 <br><button class='button' type='submit' id='submit_score' value='{$chicken_sandwich->getName()}'
-                                    name='submit_score'>RATE ME!</button></form><p>Only 1-10 is allowed, one rating per account</p>";
+                                    name='submit_score'>RATE ME!</button></form><p>Only 1-10 is allowed</p>";
 
                             if ($_SESSION['access_privileges'] == 'admin') {
 
