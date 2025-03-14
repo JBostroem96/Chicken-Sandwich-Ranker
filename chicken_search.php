@@ -57,7 +57,7 @@
                             <?php if(!isset($_SESSION['id'])) { ?>
 
                                 <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
-                                
+
                                 <?php
                             }
                                 ?>

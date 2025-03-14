@@ -10,6 +10,12 @@ h1, h2 {
     font-family: 'News Cycle', sans-serif;
 }
 
+img {
+
+    max-height: 20rem;
+}
+
+
 p, label, form {
 
     color: #ff6300;

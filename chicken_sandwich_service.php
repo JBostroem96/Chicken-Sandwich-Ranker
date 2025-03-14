@@ -17,25 +17,33 @@
 			
 			//If a new score is submitted ...
 			if (isset($_POST['submit_score'])) {
-
-				//if the user has not rated this yet ...
-				if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
-
-					$chicken_id = $_POST['id'];
-					$score = $_POST['score'];
-					$name = $_POST['submit_score'];
-
-					$user_chicken_sandwich_manager->setRating($_SESSION['id'], $chicken_id, $score, $name);
-					$chicken_sandwich_manager->getChickenSandwichScore($chicken_id, $score);
 				
-				//otherwise ...
+				if ($_POST['score'] >= 1 && $_POST['score'] <= 10) {
+
+					//if the user has not rated this yet ...
+					if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
+
+						$chicken_id = $_POST['id'];
+						$score = $_POST['score'];
+						$name = $_POST['submit_score'];
+
+						$user_chicken_sandwich_manager->setRating($_SESSION['id'], $chicken_id, $score, $name);
+						$chicken_sandwich_manager->getChickenSandwichScore($chicken_id, $score);
+					
+					//otherwise ...
+					} else {
+
+						echo "<p class='text-center text-danger'>You have already rated this chicken</p>";
+						$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
+						
+					}	
+
 				} else {
 
-					echo "<p class='text-center text-danger'>You have already rated this chicken</p>";
+					echo "<p class='text-center text-danger'>Only 1-10 are allowed.</p>";
 					$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
-					
-				}	
-			
+				}
+		
 			//If the user submits a new sandwich ...
 			} elseif(isset($_POST['enter_chicken'])) {
 

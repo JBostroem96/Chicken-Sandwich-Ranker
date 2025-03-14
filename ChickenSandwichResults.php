@@ -29,10 +29,10 @@
                             . $chicken_sandwich->getEntries() . "</p></div>"
                             . "<table id='results'>" 
                             . "<tr><td class='profile-details'>" . "<img src=" . $chicken_sandwich->getLogo()  
-                            . " class='logo'" . "style='max-height: 200px;'"
+                            . " class='logo'"  
                             . "</td><td class='profile-details'><img src=" . $chicken_sandwich->getImage()  
-                            . " class='image'" . "style='max-height: 200px;'
-                                alt='chicken sandwhich></td></tr><tr><td class='profile-details'>" 
+                            . " class='image'" .
+                                "alt='chicken sandwhich'></td></tr><tr><td class='profile-details'>" 
                             . "<h2>" . $chicken_sandwich->getName() . "</h2>"
                             . " By: "
                             . "</td></tr><tr><td>";

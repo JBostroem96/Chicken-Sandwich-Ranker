@@ -29,13 +29,24 @@ switch ($http_verb) {
             $result = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
             $user_chicken_sandwich_manager->displayUserChicken($result);
 
-        //If the user edits their score
+        //If the user clicks the edit score button
         } elseif (isset($_POST['edit_score'])) {
+            
+            if ($_POST['score'] >= 1 && $_POST['score'] <= 10) {
 
-            $score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);
-            $chicken = $chicken_sandwich_manager->getChickenSandwich($_POST['edit_score']);
-            $user_chicken_sandwich_manager->updateUserScore($_SESSION['id'], $chicken->getId(), $_POST['score']);
-            $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken, $_POST['score'], $score);
+                $score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);
+                $chicken = $chicken_sandwich_manager->getChickenSandwich($_POST['edit_score']);
+                $user_chicken_sandwich_manager->updateUserScore($_SESSION['id'], $chicken->getId(), $_POST['score']);
+                $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken, $_POST['score'], $score);
+
+            } else {
+
+                echo "<p class='text-center text-danger'>Only 1-10 are allowed</p>";
+
+                //Redirects the user to their ratings
+                $user_chicken_sandwich_manager->displayUserChicken($user_chicken_sandwich_manager->readAll($_SESSION['id']));
+            }
+            
 
         } else {
 
