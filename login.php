@@ -2,9 +2,10 @@
 
     session_start();
     require_once('pagetitles.php');
-    $page_title = MR_HOME_PAGE;
+    $page_title = MR_LOGIN_PAGE;
 
-    
+    require_once('headings.php');
+    $heading = MR_LOGIN_HEADING;
 
     require_once('UserManager.php');
 ?>
@@ -18,7 +19,7 @@
         
                 if (empty($_SESSION['id'])) {
 
-                    echo "<h1 class='text-center'>Log in</h1>";
+                    require_once('heading.php');
                 }
               
                 if (empty($_SESSION['id']) && isset($_POST['login'])) {

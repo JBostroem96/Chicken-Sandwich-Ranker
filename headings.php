@@ -7,4 +7,5 @@
     define('MR_SIGNUP_HEADING', 'Sign Up');
     define('MR_SEARCH_HEADING', 'Search');
     define('MR_SUBMIT_HEADING', 'Submit');
+    define('MR_LOGIN_HEADING', 'Log In');
 ?>

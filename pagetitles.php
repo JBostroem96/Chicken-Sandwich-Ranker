@@ -8,6 +8,7 @@
     define('MR_SEARCH_PAGE', 'Search');
     define('MR_SIGNUP_PAGE', 'Sign Up');
     define('MR_SUBMIT_PAGE', 'Submit');
+    define('MR_LOGIN_PAGE', 'login');
 ?>
     
     
