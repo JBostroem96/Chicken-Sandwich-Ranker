@@ -60,6 +60,8 @@
                                         placeholder="Enter a password" required>
                                 <div class="form-group form-check">
                                     <input type="checkbox"
+                                        class="form-check-input"
+                                        id="show_password-check"
                                         onclick="togglePassword()">
                                     <label class="form-check-label"
                                         for="show_password_check">Show Password</label>

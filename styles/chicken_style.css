@@ -1,8 +1,3 @@
-body {
-                
-    font-family: 'News Cycle', sans-serif;
-
-}
 
 #results {
     
@@ -13,12 +8,6 @@ body {
     padding: 15px;
     
 }
-
-#results:hover {
-    
-    box-shadow: 2px 2px 2px 2px #ff6300;
-}
-
 
 .post-details {
     display: flex;
