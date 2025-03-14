@@ -37,14 +37,12 @@
 
                                 echo "<li class='nav-item'><a class='nav-link text-white' href='enter_chicken.php'>Enter Chicken Sandwich</a></li>";
                             }
-                            echo "</ul><ul class='nav navbar-nav ms-auto'>";
-                            echo "<form method='GET' id='form'
-                                action='user_service.php'>"; 
-                            echo "<button class='btb btn-primary' type='submit'
-                                name='userInfo'>{$_SESSION['username']}
-                                </button></form>";
-                            echo "<li class='nav-item'><a class='nav-link text-white' href='logout.php'>Log Out ({$_SESSION['username']})</a></li></ul>";  
 
+                            echo "</ul><ul class='nav navbar-nav ms-auto'>";
+                            echo "</ul><ul class='nav navbar-nav ms-auto'>";
+                            echo "<li class='nav-item'><a class='nav-link text-white' id='user'href='user_service.php?userInfo={$_SESSION['username']}'>{$_SESSION['username']}</a></li>";
+                            echo "<li class='nav-item'><a class='nav-link text-white' href='logout.php'>Log Out ({$_SESSION['username']})</a></li></ul>";
+    
                         } else {
 
                             echo "<li class='nav-item'><a class='nav-link text-white' href='signup.php'>Sign Up</a>";

@@ -21,7 +21,6 @@
                 The submissions are done by the admin, then users can score them.
             </p>
 
-
         </main>
         
     <?php require_once("footer.php"); ?>

@@ -21,6 +21,7 @@
             private $password;
             private $access_privileges;
             private $date_created;
+            private $image;
             
             /**
              * Get the value of id
@@ -118,6 +119,26 @@
             public function setDate_created($date_created)
             {
                         $this->date_created = $date_created;
+
+                        return $this;
+            }
+
+            /**
+             * Get the value of image
+             */ 
+            public function getImage()
+            {
+                        return $this->image;
+            }
+
+            /**
+             * Set the value of image
+             *
+             * @return  self
+             */ 
+            public function setImage($image)
+            {
+                        $this->image = $image;
 
                         return $this;
             }
