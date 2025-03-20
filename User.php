@@ -150,11 +150,13 @@
 
                 if (!isset($_POST['edit_user'])) {
 
-                    echo "<table id='userInfo'" 
+                    echo "<table id='userInfo'"
                         . "<tr><th>Username: </th><td>" . $user->getUsername()  
                         . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccess_privileges() 
-                        . "</td></tr><th>Date Created: <td>" . $user->getDate_created()
+                        . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDate_created()
+                        . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='userProfileImage'"
                         . "</td></tr></table>";
+
                     
                     echo "<div class='d-flex'>" .
 
