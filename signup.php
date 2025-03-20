@@ -23,10 +23,11 @@
                     
                     $username = $_POST['user_name'];
                     $password = $_POST['password'];
+                    $image = 'images/user.png';
 
                     $user_manager = new UserManager();
 
-                    $user_manager->signUp($username, $password, $show_sign_up_form);                 
+                    $user_manager->signUp($username, $password, $show_sign_up_form, $image);                 
                 }
                 
                 if ($show_sign_up_form):

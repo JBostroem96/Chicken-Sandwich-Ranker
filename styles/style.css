@@ -4,20 +4,11 @@ body {
     font-family: 'News Cycle', sans-serif;
 }
 
-#user {
-
-    
-}
 
 h1, h2 {
 
     color: #ff6300;
     font-family: 'News Cycle', sans-serif;
-}
-
-img {
-
-    max-height: 20rem;
 }
 
 
@@ -87,4 +78,10 @@ a:hover {
 }
 p a {
     color: #ff6300;
+}
+
+#userImage {
+
+    max-width: 2rem;
+    max-height: 2rem;
 }

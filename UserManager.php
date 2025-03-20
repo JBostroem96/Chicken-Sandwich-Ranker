@@ -2,6 +2,7 @@
 
 require_once('DB.php');
 
+
 //This class' purpose is to perform queries related to the user
 class UserManager {
 
@@ -79,6 +80,7 @@ class UserManager {
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['username'] = $row['username'];
                     $_SESSION['access_privileges'] = $row['access_privileges'];
+                    $_SESSION['image'] = $row['image'];
 
                     return true;
 
@@ -98,16 +100,27 @@ class UserManager {
         }
     }
 
-    //This function's purpose is to sign the user up
-    public function signUp($username, $password, $show_sign_up_form) {
+    //This function's purpose is to validate images
+    public function validateImages() {
 
+        $this->image_error = validateImageFile();
+        $this->logo_error = validateLogo();
+
+        $this->image = addImageFileReturnPathLocation();
+        $this->logo = addLogoImageFileReturnPathLocation();
+    }
+
+    //This function's purpose is to sign the user up
+    public function signUp($username, $password, $show_sign_up_form, $image) {
+
+        
         $results = $this->authenticate($username);
 
         if (empty($results)) {
 
             $salted_hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO user (username, password) VALUES (:username, :password)";
-            $this->executeQuery($sql, [':username' => $username, ':password' => $salted_hashed_password]);
+            $sql = "INSERT INTO user (username, password, image) VALUES (:username, :password, :image)";
+            $this->executeQuery($sql, [':username' => $username, ':password' => $salted_hashed_password, ':image' => $image]);
 
             echo "<h4><p class='text-success'>Thank you for signing up <strong>$username</strong>! "
                 . "Your new account has been successfully created<br/>"
