@@ -151,11 +151,28 @@
                 if (!isset($_POST['edit_user'])) {
 
                     echo "<table id='userInfo'"
-                        . "<tr><th>Username: </th><td>" . $user->getUsername()  
-                        . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccess_privileges() 
-                        . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDate_created()
-                        . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='userProfileImage'"
-                        . "</td></tr></table>";
+                            . "<tr><th>Username: </th><td>" . $user->getUsername()  
+                            . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccess_privileges() 
+                            . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDate_created()
+                            . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='userProfileImage'"
+                            . "</td>
+                        
+                                <form enctype='multipart/form-data'
+                                class='needs-validation' novalidate method='POST'
+                                action='user_service.php'>
+                                
+                                    <div class='form-group'>
+                                        <label for='image'>Image</label>
+                                        <input type='file' id='image' name='image' class='form-control'
+                                            
+                                        placeholder='image' required>
+                                        <div class='invalid feedback'>
+                                            <p>Please provide a valid image<p>
+                                        </div>
+                                    </div>
+                                </form> 
+                            </tr>
+                        </table>";
 
                     
                     echo "<div class='d-flex'>" .
@@ -168,7 +185,7 @@
                         <button class='button' type='submit' id='user_scores'
                         name='delete_user'>DELETE</button>
                         <button class='button' type='submit' id='user_scores'
-                        name='edit_user'>EDIT PASSWORD</button></form></div></div>";
+                        name='edit_user'>EDIT PASSWORD</button>";
 
                 } else {
                         ?>
