@@ -1,6 +1,7 @@
 <?php
 
     session_start();
+    
     require_once('pagetitles.php');
     $page_title = MR_LOGIN_PAGE;
 
@@ -12,16 +13,20 @@
 
 <!DOCTYPE html>
 <html>
+
     <?php require_once('head.php'); ?>
     
         <main class='mt-4'>
+
             <?php 
-        
+
+                //if the user is not logged in, show the heading
                 if (empty($_SESSION['id'])) {
 
                     require_once('heading.php');
                 }
-              
+                
+                //if the user logs in, authenticate them
                 if (empty($_SESSION['id']) && isset($_POST['login'])) {
 
                     $username = $_POST['user_name'];
@@ -34,7 +39,8 @@
                         header("Location: index.php");
                     }
                 }
-                    
+                
+                //if the user is not logged in, display the form
                 if (empty($_SESSION['id'])):
             ?>
                     <form class="needs-validation" novalidate method="POST" id="login_form"
@@ -77,16 +83,23 @@
                         <br>
                         <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
                     </form>
+
                     <?php
-                    elseif (isset($_SESSION['id'])):
-                        echo "<h1 class='text-center'>{$_SESSION['username']}!</h1>";
-                    endif;
-                ?>
+
+                        //if the user is logged in, display their username
+                        elseif (isset($_SESSION['id'])):
+                            echo "<h1 class='text-center'>{$_SESSION['username']}!</h1>";
+                        endif;
+                    ?>
                         
         </main>
-    
+        
+        <!-- javascript to validate the form -->
         <script src="js/formValidation.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        <!-- javascript to toggle the password -->
         <script src="js/togglePassword.js"></script>
         
         <?php require_once("footer.php"); ?>
