@@ -1,7 +1,8 @@
 <?php
 
 require_once('DB.php');
-
+require_once('image-file-util.php');
+require_once('logo-file-util.php');
 
 //This class' purpose is to perform queries related to the user
 class UserManager {
@@ -101,13 +102,11 @@ class UserManager {
     }
 
     //This function's purpose is to validate images
-    public function validateImages() {
+    public function validateImage() {
 
         $this->image_error = validateImageFile();
-        $this->logo_error = validateLogo();
-
         $this->image = addImageFileReturnPathLocation();
-        $this->logo = addLogoImageFileReturnPathLocation();
+        
     }
 
     //This function's purpose is to sign the user up
@@ -149,6 +148,21 @@ class UserManager {
         $salted_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
         $sql = "UPDATE user SET password = :password WHERE id = :id";
         $this->executeQuery($sql, [':id' => $id, ':password' => $salted_hashed_password]);
+    }
+
+    //This function's purpose is to update the user's image
+    public function updateImage($id) {
+
+        $this->validateImage();
+
+        $sql = "UPDATE user SET image = :image WHERE id = :id";
+        $this->executeQuery($sql, [':id' => $id, ':image' =>$this->image]);
+
+        $_SESSION['image'] = $this->image;
+
+        echo "<p class='text-success text-center'>You successfully updated your user avatar!</p>";
+
+        $this->readById($id);
     }
 }
 

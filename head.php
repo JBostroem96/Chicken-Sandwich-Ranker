@@ -40,10 +40,11 @@
                             
                             echo "</ul><ul class='nav navbar-nav ms-auto'>";
                             echo "</ul><ul class='nav navbar-nav ms-auto'>";
-                            echo "<li class='nav-item'><a class='nav-link text-white' href='user-service.php?user-info={$_SESSION['username']}'><img src={$_SESSION['image']} id='user-image'</a></li>";
+                            echo "<li class='nav-item'><a class='nav-link text-white' href='user-service.php?user-info={$_SESSION['username']}'><img src='{$_SESSION['image']}' id='user-image' alt='User Image'></a></li>";
                             echo "<li class='nav-item'><a class='nav-link text-white' href='logout.php'>Log Out ({$_SESSION['username']})</a></li></ul>";
     
                         } else {
+                            
 
                             echo "<li class='nav-item'><a class='nav-link text-white' href='sign-up.php'>Sign Up</a>";
                             echo "<li class='nav-item'><a class='nav-link text-white' href='login.php'>Log In</a>";  

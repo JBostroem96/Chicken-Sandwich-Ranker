@@ -9,7 +9,7 @@ if(isset($_POST['id'])) {
 
 
         <form enctype="multipart/form-data" id='submit-form'
-            class="needs_validation" novalidate method="POST"
+            class="needs-validation" novalidate method="POST"
             action="chicken-sandwich-service.php">
             <div class="form-group">
                 <label for="name">Name</label>
@@ -48,8 +48,8 @@ if(isset($_POST['id'])) {
                 </div> 
             </div>
 
-            <button class="button" type="submit" <?php if (isset($_POST['edit-chicken']) || isset($_POST['id'])) { ?> name="<?php echo 'id'; ?>" value="<?php echo $_POST['id']?>" <?php } else {
-                ?> name="enter-chicken"<?php
+            <button class="button" type="submit" <?php if (isset($_POST['edit-chicken-sandwich']) || isset($_POST['id'])) { ?> name="<?php echo 'id'; ?>" value="<?php echo $_POST['id']?>" <?php } else {
+                ?> name="enter-chicken-sandwich"<?php
 
             } ?>>Submit Chicken</button>
         </form>

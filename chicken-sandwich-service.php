@@ -47,7 +47,7 @@
 				}
 		
 			//If the user submits a new sandwich ...
-			} elseif(isset($_POST['enter-chicken'])) {
+			} elseif(isset($_POST['enter-chicken-sandwich'])) {
 
 				//If it doesn't already exist ...
 				if ($chicken_sandwich_manager->validateChickenSandwich($_POST['name']) == false) {
@@ -67,7 +67,7 @@
 				$chicken_sandwich_manager->delete($_POST['id']);
 			
 			//If the admin edits a sandwich ...	
-			} elseif (isset($_POST['edit-chicken'])) {
+			} elseif (isset($_POST['edit-chicken-sandwich'])) {
 				
 				//Bring up the form
 				require_once('form.php');

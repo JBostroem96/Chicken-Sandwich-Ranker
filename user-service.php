@@ -33,7 +33,7 @@ switch ($http_verb) {
             require_once('logout.php');
         
         //If the user clicks on edit password
-        } elseif(isset($_POST['edit-user'])) {
+        } elseif(isset($_POST['password-to-change'])) {
 
             //Read use
             $user_manager->readById($_SESSION['id']);
@@ -58,6 +58,10 @@ switch ($http_verb) {
                 }
                 
             }
+
+        } elseif (isset($_POST['edit-image'])) {
+
+            $user_manager->updateImage($_SESSION['id']);
 
         } else {
 

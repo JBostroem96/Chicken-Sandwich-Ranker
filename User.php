@@ -148,14 +148,14 @@
                 
                 echo "<div class='d-flex flex-column'>";
 
-                if (!isset($_POST['edit-user'])) {
+                if (!isset($_POST['password-to-change'])) {
 
                     echo "<table id='user-info'"
                             . "<tr><th>Username: </th><td>" . $user->getUsername()  
                             . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccessPrivileges() 
                             . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDateCreated()
-                            . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='user-profile-image'"
-                            . "</td>
+                            . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='user-profile-image' alt='user profile image'>"
+                            . "</td></table>
                         
                                 <form enctype='multipart/form-data'
                                 class='needs-validation' novalidate method='POST'
@@ -163,13 +163,14 @@
                                 
                                     <div class='form-group'>
                                         <label for='image'>Image</label>
-                                        <input type='file' id='image' name='image' class='form-control'
+                                        <input type='file' id='edit-image' name='image' class='form-control'
                                             
                                         placeholder='image' required>
                                         <div class='invalid feedback'>
                                             <p>Please provide a valid image<p>
                                         </div>
                                     </div>
+                                    <button type='submit' name='edit-image'>UPDATE</button>
                                 </form> 
                             </tr>
                         </table>";
@@ -182,10 +183,10 @@
                         name='user-scores'>YOUR RATINGS</button></form>
                         
                         <form action='user-service.php' method='POST'>
-                        <button class='button' type='submit' id='user-scores'
+                        <button class='button' type='submit'
                         name='delete-user'>DELETE</button>
-                        <button class='button' type='submit' id='user-scores'
-                        name='edit-user'>EDIT PASSWORD</button>";
+                        <button class='button' type='submit'
+                        name='password-to-change'>EDIT PASSWORD</button>";
 
                 } else {
                         ?>

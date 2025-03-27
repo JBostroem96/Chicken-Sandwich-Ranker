@@ -1,6 +1,7 @@
 <?php
 
     session_start();
+    
     require_once('page-titles.php');
     $page_title = MR_HOME_PAGE;
 

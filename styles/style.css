@@ -80,15 +80,15 @@ p a {
     color: #ff6300;
 }
 
-#userImage {
+#user-image {
 
     max-width: 2rem;
     max-height: 2rem;
 }
 
-#userProfileImage {
+#user-profile-image {
 
-    max-width: 4rem;
-    max-height: 4rem;
+    max-width: 6rem;
+    max-height: 6rem;
 }
 
