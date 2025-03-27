@@ -1,6 +1,6 @@
 
 <?php
-require_once 'fileconstants.php';
+require_once 'file-constants.php';
 
 
 /**

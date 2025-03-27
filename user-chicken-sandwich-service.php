@@ -1,7 +1,7 @@
  
 <?php
     
-    require_once('authorizeaccess_user.php');
+    require_once('authorize-user-access.php');
     require_once('UserChickenSandwichManager.php');
     require_once('ChickenSandwichManager.php');
 
@@ -15,32 +15,32 @@ switch ($http_verb) {
     case "POST":
         
         //If a score is being deleted
-        if (isset($_POST['delete_entry'])) {
+        if (isset($_POST['delete-entry'])) {
 
             
-            $user_chicken_sandwich_manager->delete($_SESSION['id'], $_POST['chicken_id']);
-            $chicken = $chicken_sandwich_manager->getChickenSandwich($_POST['chicken_id']);
+            $user_chicken_sandwich_manager->delete($_SESSION['id'], $_POST['chicken-sandwich-id']);
+            $chicken_sandwich = $chicken_sandwich_manager->getChickenSandwich($_POST['chicken-sandwich-id']);
             
-            $user_chicken_sandwich_manager->updateScoreOnDelete($chicken, $_POST['delete_entry'], $_SESSION['id']);  
+            $user_chicken_sandwich_manager->updateScoreOnDelete($chicken_sandwich, $_POST['delete-entry'], $_SESSION['id']);  
             
         //If the user edits their entry ...
-        } elseif(isset($_POST['edit_entry'])) {
+        } elseif(isset($_POST['edit-entry'])) {
 
             $result = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
             $user_chicken_sandwich_manager->displayUserChicken($result);
 
         //If the user clicks the edit score button
-        } elseif (isset($_POST['edit_score'])) {
+        } elseif (isset($_POST['edit-score'])) {
             
             $score = $_POST['score'];
 
             //Validates that the submitted score is an int and that its score is between 1 and 10
             if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
 
-                $current_score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit_score']);
-                $chicken = $chicken_sandwich_manager->getChickenSandwich($_POST['edit_score']);
-                $user_chicken_sandwich_manager->updateUserScore($_SESSION['id'], $chicken->getId(), $_POST['score']);
-                $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken, $_POST['score'], $current_score);
+                $current_score = $user_chicken_sandwich_manager->getChickenSandwichScore($_SESSION['id'], $_POST['edit-score']);
+                $chicken_sandwich = $chicken_sandwich_manager->getChickenSandwich($_POST['edit-score']);
+                $user_chicken_sandwich_manager->updateUserScore($_SESSION['id'], $chicken_sandwich->getId(), $_POST['score']);
+                $user_chicken_sandwich_manager->updateScore($_SESSION['id'], $chicken_sandwich, $_POST['score'], $current_score);
 
             } else {
 
@@ -62,7 +62,7 @@ switch ($http_verb) {
         case "GET":
 
             //If the user views their scores
-            if (isset($_GET['user_scores'])) {
+            if (isset($_GET['user-scores'])) {
 
                 $result = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
                 $user_chicken_sandwich_manager->displayUserChicken($result);

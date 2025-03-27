@@ -3,7 +3,7 @@
         class UserChickenSandwich {
 
             private $id;
-            private $chicken_id;
+            private $chicken_sandwich_id;
             private $user_id;
             private $score;
             private $name;
@@ -31,7 +31,7 @@
             /**
              * Get the value of chicken
              */ 
-            public function getChicken_id()
+            public function getChickenSandwichId()
             {
                         return $this->chicken_id;
             }
@@ -41,7 +41,7 @@
              *
              * @return  self
              */ 
-            public function setChicken_id($chicken_id)
+            public function setChickenSandwichId($chicken_id)
             {
                         $this->chicken_id = $chicken_id;
 
@@ -51,7 +51,7 @@
             /**
              * Get the value of user
              */ 
-            public function getUser_id()
+            public function getUserId()
             {
                         return $this->user_id;
             }
@@ -61,7 +61,7 @@
              *
              * @return  self
              */ 
-            public function setUser_id($user_id)
+            public function setUserId($user_id)
             {
                         $this->user_id = $user_id;
 

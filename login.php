@@ -2,7 +2,7 @@
 
     session_start();
     
-    require_once('pagetitles.php');
+    require_once('page-titles.php');
     $page_title = MR_LOGIN_PAGE;
 
     require_once('headings.php');
@@ -29,7 +29,7 @@
                 //if the user logs in, authenticate them
                 if (empty($_SESSION['id']) && isset($_POST['login'])) {
 
-                    $username = $_POST['user_name'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
         
                     $user_manager = new UserManager();
@@ -43,15 +43,15 @@
                 //if the user is not logged in, display the form
                 if (empty($_SESSION['id'])):
             ?>
-                    <form class="needs-validation" novalidate method="POST" id="login_form"
+                    <form class="needs-validation" novalidate method="POST" id="login-form"
                         action="<?= $_SERVER['PHP_SELF']; ?>">
                         <div class="form-group row">
-                            <label for="user_name"
-                                class="col-sm-2 col-form-label-lg">User Name</label>
+                            <label for="username"
+                                class="col-sm-2 col-form-label-lg">Username</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control"
-                                    id="user_name" name="user_name"
-                                    placeholder="Enter a user name" required>
+                                    id="username" name="username"
+                                    placeholder="Enter a username" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid user name
                                 </div>
@@ -67,10 +67,10 @@
                                 <div class="form-group form-check">
                                     <input type="checkbox"
                                         class="form-check-input"
-                                        id="show_password-check"
+                                        id="show-password-check"
                                         onclick="togglePassword()">
                                     <label class="form-check-label"
-                                        for="show_password_check">Show Password</label>
+                                        for="show-password-check">Show Password</label>
                                 </div>
                                 <div class="invalid-feedback">
                                     Please provide a valid password
@@ -81,7 +81,7 @@
                             name="login">Log In
                         </button>
                         <br>
-                        <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
+                        <p>Don't have an account? <a href='sign-up.php'>Sign up here!</a> 
                     </form>
 
                     <?php

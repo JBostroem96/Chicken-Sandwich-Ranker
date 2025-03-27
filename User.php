@@ -1,6 +1,6 @@
 <?php 
 
-    require_once('pagetitles.php');
+    require_once('page-titles.php');
     $page_title = MR_USER_PAGE;
 
     require_once('headings.php');
@@ -86,7 +86,7 @@
             /**
              * Get the value of access_privileges
              */ 
-            public function getAccess_privileges()
+            public function getAccessPrivileges()
             {
                         return $this->access_privileges;
             }
@@ -96,7 +96,7 @@
              *
              * @return  self
              */ 
-            public function setAccess_privileges($access_privileges)
+            public function setAccessPrivileges($access_privileges)
             {
                         $this->access_privileges = $access_privileges;
 
@@ -106,7 +106,7 @@
             /**
              * Get the value of date_created
              */ 
-            public function getDate_created()
+            public function getDateCreated()
             {
                         return $this->date_created;
             }
@@ -116,7 +116,7 @@
              *
              * @return  self
              */ 
-            public function setDate_created($date_created)
+            public function setDateCreated($date_created)
             {
                         $this->date_created = $date_created;
 
@@ -148,18 +148,18 @@
                 
                 echo "<div class='d-flex flex-column'>";
 
-                if (!isset($_POST['edit_user'])) {
+                if (!isset($_POST['edit-user'])) {
 
-                    echo "<table id='userInfo'"
+                    echo "<table id='user-info'"
                             . "<tr><th>Username: </th><td>" . $user->getUsername()  
-                            . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccess_privileges() 
-                            . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDate_created()
-                            . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='userProfileImage'"
+                            . "</td></tr><tr><th>User Type: </th><td>" . $user->getAccessPrivileges() 
+                            . "</td></tr><tr><th>Date Created: </th><td>" . $user->getDateCreated()
+                            . "</td></tr><tr><th>Profile Image: </th><td><img src='" . $user->getImage() . "' id='user-profile-image'"
                             . "</td>
                         
                                 <form enctype='multipart/form-data'
                                 class='needs-validation' novalidate method='POST'
-                                action='user_service.php'>
+                                action='user-service.php'>
                                 
                                     <div class='form-group'>
                                         <label for='image'>Image</label>
@@ -177,25 +177,25 @@
                     
                     echo "<div class='d-flex'>" .
 
-                        "<form action='user_chicken_sandwich_service.php' method='GET' class='mx-1'>
-                        <button class='button' type='submit' id='user_scores'
-                        name='user_scores'>YOUR RATINGS</button></form>
+                        "<form action='user-chicken-sandwich-service.php' method='GET' class='mx-1'>
+                        <button class='button' type='submit' id='user-scores'
+                        name='user-scores'>YOUR RATINGS</button></form>
                         
-                        <form action='user_service.php' method='POST'>
-                        <button class='button' type='submit' id='user_scores'
-                        name='delete_user'>DELETE</button>
-                        <button class='button' type='submit' id='user_scores'
-                        name='edit_user'>EDIT PASSWORD</button>";
+                        <form action='user-service.php' method='POST'>
+                        <button class='button' type='submit' id='user-scores'
+                        name='delete-user'>DELETE</button>
+                        <button class='button' type='submit' id='user-scores'
+                        name='edit-user'>EDIT PASSWORD</button>";
 
                 } else {
                         ?>
 
-                    <form action='user_service.php' method='POST'>
-                        <label for="currentPassword"
+                    <form action='user-service.php' method='POST'>
+                        <label for="current-password"
                                 class="col-sm-2 col-form-label-lg">Current Password:</label>
                             <div class="col-sm-4">
                                 <input type="password" class="form-control"
-                                        id="currentPassword" name="currentPassword"
+                                        id="current-password" name="current-password"
                                         placeholder="Enter a password" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid password
@@ -205,24 +205,24 @@
                                 class="col-sm-2 col-form-label-lg">New Password:</label>
                             <div class="col-sm-4">
                                 <input type="password" class="form-control"
-                                        id="password" name="newPassword"
+                                        id="password" name="new-password"
                                         placeholder="Enter a password" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid password
                                 </div>
                             </div>
-                            <label for="repeatPassword"
+                            <label for="repeated-password"
                                 class="col-sm-2 col-form-label-lg">Enter Password Again:</label>
                             <div class="col-sm-4">
                                 <input type="password" class="form-control"
-                                        id="repeatPassword" name="repeatPassword"
+                                        id="repeated-password" name="repeated-password"
                                         placeholder="Enter a password" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid password
                                 </div>
                             </div>
                             <button type="submit"
-                                name="edit_password">EDIT
+                                name="edit-password">EDIT
                             </button>
                     </form>
                 </main>

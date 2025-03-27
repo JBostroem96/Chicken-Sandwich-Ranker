@@ -1,7 +1,7 @@
  
 <?php
 
-require_once('authorizeaccess_user.php');
+require_once('authorize-user-access.php');
 require_once('UserManager.php');
 require_once('User.php');
 require_once('UserChickenSandwichManager.php');
@@ -18,13 +18,13 @@ switch ($http_verb) {
     case "POST":
         
         //If the user is being deleted ...
-        if (isset($_POST['delete_user'])) {
+        if (isset($_POST['delete-user'])) {
 
             //Get all user entries
             foreach($user_chicken_sandwich_manager->readAll($_SESSION['id']) as $result) {
 
                 //Update the chicken sandwich score, passing over the chicken sandwich id and the user score
-                $chicken_sandwich_manager->updateScoreOnDeletionOfUser($result->getChicken_id(), $result->getScore());
+                $chicken_sandwich_manager->updateScoreOnDeletionOfUser($result->getChickenId(), $result->getScore());
             }
 
             //Delete user
@@ -33,22 +33,22 @@ switch ($http_verb) {
             require_once('logout.php');
         
         //If the user clicks on edit password
-        } elseif(isset($_POST['edit_user'])) {
+        } elseif(isset($_POST['edit-user'])) {
 
             //Read use
             $user_manager->readById($_SESSION['id']);
         
         //if the user's password is being edited
-        } elseif (isset($_POST['edit_password'])) {
+        } elseif (isset($_POST['edit-password'])) {
 
             //If the log in is successful ...
-            if ($user_manager->login($_SESSION['username'], $_POST['currentPassword']) == true) {
+            if ($user_manager->login($_SESSION['username'], $_POST['current-password']) == true) {
 
                 //And if the new password is the same as the repeated password ...
-                if ($_POST['newPassword'] == $_POST['repeatPassword']) {
+                if ($_POST['new-password'] == $_POST['repeated-password']) {
 
                     //Update the password
-                    $user_manager->updatePassword($_POST['newPassword'], $_SESSION['id']);
+                    $user_manager->updatePassword($_POST['new-password'], $_SESSION['id']);
 
                     echo "<h1 class='text-success'>You successfully updated your password</h1>";
 
@@ -70,7 +70,7 @@ switch ($http_verb) {
         case "GET":
 
             //If the user views their info ...
-            if (isset($_GET['userInfo'])) {
+            if (isset($_GET['user-info'])) {
 
                 //Read user
                 $user_manager->readById($_SESSION['id']);

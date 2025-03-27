@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    require_once('pagetitles.php');
+    require_once('page-titles.php');
     $page_title = MR_SEARCH_PAGE;
 
     require_once('headings.php');
@@ -20,12 +20,12 @@
 
                     if (empty($_SESSION['id']) && isset($_POST['login'])) {
 
-                        $username = $_POST['user_name'];
+                        $username = $_POST['username'];
                         $password = $_POST['password'];
 
                         $user_manager = new UserManager();
 
-                        $user_manager->login($username, $password);
+                        $user_manager->logIn($username, $password);
 
                     } else {
 
@@ -34,24 +34,24 @@
                     
                     
                 ?>
-                    <form class="needs-validation" novalidate method="GET" id="search_form"
-                        action="chicken_sandwich_service.php">
+                    <form class="needs-validation" novalidate method="GET" id="search-form"
+                        action="chicken-sandwich-service.php">
                         <div class="text-white p-3">
-                            <label class="mb-2 text-muted fw-bold" for="searchTerm">Search</label>
-                            <input  class="form-control" type="search" name="searchTerm" id="searchTerm">
+                            <label class="mb-2 text-muted fw-bold" for="search-term">Search</label>
+                            <input  class="form-control" type="search" name="search-term" id="search-term">
                             <div class="form-group">
                                 <label class="fw-bold" for="name">Name</label>
-                                <input class="form-check-input" type="radio" name="searchType" id="name" value="name" checked>
+                                <input class="form-check-input" type="radio" name="search-type" id="name" value="name" checked>
                             </div>
                             <div class="form-group">
                                 <label class="fw-bold" for="score">Score</label>
-                                <input class="form-check-input" type="radio" name="searchType" id="score" value="score">
+                                <input class="form-check-input" type="radio" name="search-type" id="score" value="score">
                             </div>
                             <button type="submit"
                                 name="search">Search
                             </button>
                             <button type="submit"
-                                name="viewAll">Search All
+                                name="view-all">Search All
                             </button>
                             <br>
                             <?php if(!isset($_SESSION['id'])) { ?>

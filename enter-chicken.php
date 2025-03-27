@@ -1,7 +1,7 @@
 <?php
 
-    require_once('authorizeaccess.php');
-    require_once('pagetitles.php');
+    require_once('authorize-access.php');
+    require_once('page-titles.php');
     $page_title = MR_SUBMIT_PAGE;
 
     require_once('headings.php');

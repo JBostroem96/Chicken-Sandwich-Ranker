@@ -49,11 +49,11 @@ class UserManager {
     //This function's purpose is to display the user
     public function displayUser($user) {
 
-        $userDisplay = new User();
+        $user_display = new User();
 
-        foreach ($user as $userEntry) {
+        foreach ($user as $user_entry) {
 
-            $userDisplay->display($userEntry);
+            $user_display->display($user_entry);
         }
     }
 

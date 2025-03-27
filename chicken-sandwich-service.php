@@ -16,7 +16,7 @@
 		case "POST":
 			
 			//If a new score is submitted ...
-			if (isset($_POST['submit_score'])) {
+			if (isset($_POST['submit-score'])) {
 				
 				$score = $_POST['score'];
 				
@@ -27,7 +27,7 @@
 					if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
 
 						$chicken_id = $_POST['id'];
-						$name = $_POST['submit_score'];
+						$name = $_POST['submit-score'];
 
 						$user_chicken_sandwich_manager->setRating($_SESSION['id'], $chicken_id, $score, $name);
 						$chicken_sandwich_manager->getChickenSandwichScore($chicken_id, $score);
@@ -47,7 +47,7 @@
 				}
 		
 			//If the user submits a new sandwich ...
-			} elseif(isset($_POST['enter_chicken'])) {
+			} elseif(isset($_POST['enter-chicken'])) {
 
 				//If it doesn't already exist ...
 				if ($chicken_sandwich_manager->validateChickenSandwich($_POST['name']) == false) {
@@ -62,12 +62,12 @@
 				}
 			
 			//If the admin deletes a sandwich ...
-			} elseif(isset($_POST['delete_chicken'])) {
+			} elseif(isset($_POST['delete-chicken'])) {
 
 				$chicken_sandwich_manager->delete($_POST['id']);
 			
 			//If the admin edits a sandwich ...	
-			} elseif (isset($_POST['edit_chicken'])) {
+			} elseif (isset($_POST['edit-chicken'])) {
 				
 				//Bring up the form
 				require_once('form.php');
@@ -100,22 +100,22 @@
 			case "GET":
 
 				//If all sandwiches are being searched ...
-				if (isset($_GET['viewAll'])) {
+				if (isset($_GET['view-all'])) {
 
                     $chicken_sandwich_manager->displayAllChickenSandwiches();
 				
 				//If a specifc sandwich is being searched ...
-				} elseif (isset($_GET['searchTerm']) AND isset($_GET['searchType'])) {	
+				} elseif (isset($_GET['search-term']) AND isset($_GET['search-type'])) {	
 					
 					//Loop through all sandwiches
 					foreach ($chicken_sandwich_manager->readAll() as $chicken_data) {
 
 						//using the search type ...
-						switch ($_GET['searchType']) {
+						switch ($_GET['search-type']) {
 
 							//If it equals a name search ...
 							case 'name':
-								if ($chicken_data->getName() == $_GET['searchTerm']) {
+								if ($chicken_data->getName() == $_GET['search-term']) {
 
 									$chicken_sandwich_manager->displayChickenSandwich($chicken_data->getId());
 
@@ -124,7 +124,7 @@
 								break;
 							//else, if it equals a 'score' search ...
 							case 'score':
-								if ($chicken_data->getScore() == $_GET['searchTerm']) {
+								if ($chicken_data->getScore() == $_GET['search-term']) {
 
 									$chicken_sandwich_manager->displayChickenSandwich($chicken_data->getId());
 								}

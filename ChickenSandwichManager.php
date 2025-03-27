@@ -1,7 +1,7 @@
 <?php
 
-require_once('imagefileutil.php');
-require_once('logofileutil.php');
+require_once('image-file-util.php');
+require_once('logo-file-util.php');
 require_once('ChickenSandwichResults.php');
 require_once('ChickenSandwich.php');
 require_once('DB.php');
@@ -42,14 +42,14 @@ class ChickenSandwichManager {
 	//This function's purpose is to read all entries
     public function readAll() {
 
-        $sql = "SELECT * FROM chicken ORDER BY average DESC";
+        $sql = "SELECT * FROM chicken_sandwich ORDER BY average DESC";
         return $this->executeQuery($sql);
     }
 
 	//This function's purpose is to read the entry by id
     public function readById($id) {
 
-        $sql = "SELECT * FROM chicken WHERE id=:id ORDER BY average DESC";
+        $sql = "SELECT * FROM chicken_sandwich WHERE id=:id ORDER BY average DESC";
         return $this->executeQuery($sql, [':id' => $id]);
     }
 
@@ -61,23 +61,23 @@ class ChickenSandwichManager {
     }
 
 	//This function's purpose is to get the chicken sandwich score
-    public function getChickenSandwichScore($id, $chicken_score) {
+    public function getChickenSandwichScore($id, $chicken_sandwich_score) {
 
-        $chicken = $this->getChickenSandwich($id);
+        $chicken_sandwich = $this->getChickenSandwich($id);
 
-        if ($chicken) {
+        if ($chicken_sandwich) {
             
-            $this->updateScore($chicken->getId(), $chicken_score, $chicken->getEntries(), $chicken->getScore());
+            $this->updateScore($chicken_sandwich->getId(), $chicken_sandwich_score, $chicken_sandwich->getEntries(), $chicken_sandwich->getScore());
         }
     }
 
 	//This function's purpose is to display all chicken sandwiches
     public function displayAllChickenSandwiches() {
 
-        foreach ($this->readAll() as $chicken_data) {
+        foreach ($this->readAll() as $chicken_sandwich_data) {
             
             $this->rank++;
-            (new ChickenSandwichResults())->display($chicken_data, $this->rank);
+            (new ChickenSandwichResults())->display($chicken_sandwich_data, $this->rank);
         }
     }
 
@@ -96,13 +96,13 @@ class ChickenSandwichManager {
     }
 
 	//This function's purpose is to update the score
-    public function updateScore($id, $chicken_score, $entries, $new_score) {
+    public function updateScore($id, $chicken_sandwich_score, $entries, $new_score) {
 
         $entries++;
-        $new_score += $chicken_score;
+        $new_score += $chicken_sandwich_score;
         $average = $new_score / $entries;
 
-        $sql = "UPDATE chicken SET score=:score, average=:average, entries=:entries WHERE id=:id";
+        $sql = "UPDATE chicken_sandwich SET score=:score, average=:average, entries=:entries WHERE id=:id";
         $params = [':id' => $id, ':score' => $new_score, ':average' => $average, ':entries' => $entries];
 
         $this->executeQuery($sql, $params, false);
@@ -113,15 +113,15 @@ class ChickenSandwichManager {
 	//This function's purpose is to update the score on the deletion of entry by user
     public function updateScoreOnDeletionOfUser($id, $score) {
 
-        $chicken = $this->getChickenSandwich($id);
+        $chicken_sandwich = $this->getChickenSandwich($id);
 
-        if ($chicken) {
+        if ($chicken_sandwich) {
 
-            $entries = $chicken->getEntries();
-            $new_score = $chicken->getScore() - $score;
+            $entries = $chicken_sandwich->getEntries();
+            $new_score = $chicken_sandwich->getScore() - $score;
             $average = $new_score / --$entries;
 
-            $sql = "UPDATE chicken SET score=:score, average=:average, entries=:entries WHERE id=:id";
+            $sql = "UPDATE chicken_sandwich SET score=:score, average=:average, entries=:entries WHERE id=:id";
             $params = [':id' => $id, ':score' => $new_score, ':average' => $average, ':entries' => $entries];
 
             $this->executeQuery($sql, $params, false);
@@ -143,7 +143,7 @@ class ChickenSandwichManager {
 
         $this->validateImages();
 
-        $sql = "UPDATE chicken SET name=:name, logo=:logo, image=:image, source=:source WHERE id=:id";
+        $sql = "UPDATE chicken_sandwich SET name=:name, logo=:logo, image=:image, source=:source WHERE id=:id";
         $params = [':id' => $id, ':name' => $name, ':logo' => $this->logo, ':image' => $this->image, ':source' => $source];
 
         $this->executeQuery($sql, $params, false);
@@ -161,33 +161,34 @@ class ChickenSandwichManager {
 
         $this->validateImages();
 
-        $sql = "INSERT INTO chicken (name, logo, image, source) VALUES (:name, :logo, :image, :source)";
+        $sql = "INSERT INTO chicken_sandwich (name, logo, image, source) VALUES (:name, :logo, :image, :source)";
         $params = [':name' => $name, ':logo' => $this->logo, ':image' => $this->image, ':source' => $source];
 
         $this->executeQuery($sql, $params, false);
 
-        $lastInsertId = $this->db->lastInsertId();
+        $lastInsertedId = $this->db->lastInsertId();
 
-        $this->displayChickenSandwich($lastInsertId);
+        $this->displayChickenSandwich($lastInsertedId);
     }
 
 	//This function's purpose is to validate the chicken sandwich, ensuring the name doesn't already exist
     public function validateChickenSandwich($name) {
 
 		//Get the names
-        $sandwiches = array_map(function($chicken_sandwich) {
+        $chicken_sandwiches = array_map(function($chicken_sandwich) {
+
             return $chicken_sandwich->getName();
 
         }, $this->readAll());
 
 		//Return whether the name exists or not (true/false)
-        return in_array($name, $sandwiches);
+        return in_array($name, $chicken_sandwiches);
     }
 
 	//This function's purpose is to delete an entry
     public function delete($id) {
 
-        $sql = "DELETE FROM chicken WHERE id=:id";
+        $sql = "DELETE FROM chicken_sandwich WHERE id=:id";
         $params = [':id' => $id];
         $this->executeQuery($sql, $params, false);
 

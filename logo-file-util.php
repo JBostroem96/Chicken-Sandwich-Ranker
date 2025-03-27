@@ -1,5 +1,5 @@
 <?php
-require_once 'logofileconstants.php';
+require_once 'logo-file-constants.php';
 
 
 /**

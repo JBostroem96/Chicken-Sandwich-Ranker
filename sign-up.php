@@ -1,6 +1,6 @@
 <?php
 
-    require_once('pagetitles.php');
+    require_once('page-titles.php');
     $page_title = MR_SIGNUP_PAGE;
 
     require_once('headings.php');
@@ -21,7 +21,7 @@
 
                 if (isset($_POST['signUp'])) {
                     
-                    $username = $_POST['user_name'];
+                    $username = $_POST['username'];
                     $password = $_POST['password'];
                     $image = 'images/user.png';
 
@@ -32,14 +32,14 @@
                 
                 if ($show_sign_up_form):
             ?>
-                    <form class="needs-validation" novalidate method="POST" id="signup_form"
+                    <form class="needs-validation" novalidate method="POST" id="sign-up-form"
                         action="<?= $_SERVER['PHP_SELF']; ?>">
                         <div class="form-group row">
-                            <label for="user_name"
+                            <label for="username"
                                 class="col-sm-2 col-form-label-lg">User Name</label>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control"
-                                    id="user_name" name="user_name"
+                                    id="username" name="username"
                                     placeholder="Enter a user name" required>
                                 <div class="invalid-feedback">
                                     Please provide a valid user name
@@ -56,10 +56,10 @@
                                 <div class="form-group form-check">
                                     <input type="checkbox"
                                         class="form-check-input"
-                                        id="show_password-check"
+                                        id="show-password-check"
                                         onclick="togglePassword()">
                                     <label class="form-check-label"
-                                        for="show_password_check">Show Password</label>
+                                        for="show-password-check">Show Password</label>
                                 </div>
                                 <div class="invalid-feedback">
                                     Please provide a valid password.
