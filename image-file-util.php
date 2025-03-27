@@ -62,7 +62,7 @@ function validateImageFile() {
  * name to the ML_UPLOAD_PATH (e.g. images/movie_image.png). IF an image
  * file was NOT uploaded, an empty string will be returned for the path.
  * 
- * @retun string Path to image file IF a file was uploaded AND moved to the
+ * @return string Path to image file IF a file was uploaded AND moved to the
  * ML_UPLOAD_PATH (images/) folder, otherwise and empty string */
 function addImageFileReturnPathLocation() {
 
