@@ -12,7 +12,7 @@ require_once 'file-constants.php';
  * returned. If there is an error, a string containing constraints the file failed
  * to validate to are returned.
  * 
- * @retun string Empty if validation is successful, otherwise error string containing
+ * @return string Empty if validation is successful, otherwise error string containing
  * constraints the image file failed to validate to. */
 function validateImageFile() {
 

@@ -12,10 +12,6 @@ require_once('DB.php');
 class ChickenSandwichManager {
 
     private $db;
-    private $image_error;
-    private $logo_error;
-    private $image; 
-    private $logo;
     private $rank = 0;
 
 	//This function's purpose is to be the constructor, which connects to the DB
