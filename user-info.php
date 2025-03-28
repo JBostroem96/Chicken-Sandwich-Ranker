@@ -44,7 +44,7 @@
 
         } else {
 
-            require_once('user-account-form.php');
+            require_once('user-password-form.php');
             ?>
                 
     <?php
