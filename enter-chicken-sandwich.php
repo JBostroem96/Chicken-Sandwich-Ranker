@@ -13,15 +13,13 @@
 <html>
     <?php require_once('head.php'); ?>
     
+    <body>
         <main class='mt-4'>
+
             <?php require_once('heading.php'); ?>
                 
+            <?php require_once("form.php"); ?>
                 
-                <main class="mt-2">
-                    <?php require_once("form.php"); ?>
-                </main>
-                
-            </div>
         </main>
     </body>
 

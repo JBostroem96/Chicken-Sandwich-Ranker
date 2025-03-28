@@ -14,7 +14,6 @@
         
             require_once('head.php');
         
-            
             require_once('heading.php');   
 
             //display chicken sandwich and the permission-related features
