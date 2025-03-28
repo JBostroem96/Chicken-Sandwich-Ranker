@@ -29,7 +29,6 @@
                     . "<h2>" 
                     . $chicken_sandwich->getName() 
                     . "</h2>"
-                    . " By: "
                     . "</td></tr><tr><td>";
                                                 
             if (isset($_SESSION['access_privileges'])) {
@@ -47,14 +46,14 @@
                         <button class='button' type='submit' id='delete-chicken'
                         name='delete-chicken'>DELETE</button>
                         <button class='button' type='submit' id='edit-chicken'
-                        name='edit-chicken'>EDIT</button></form>";
+                        name='edit-chicken-sandwich'>EDIT</button></form>";
                 } 
             }
 
             echo "<tr><td>Source: " 
                 . $chicken_sandwich->getSource() 
                 . '</td></tr>'              
-                .  "</form></table></div>'";                           
+                .  "</form></table></div>";                           
         }
                     ?>  
         </main>
