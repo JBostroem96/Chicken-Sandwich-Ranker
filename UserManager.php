@@ -3,6 +3,7 @@
 require_once('DB.php');
 require_once('image-file-util.php');
 require_once('logo-file-util.php');
+require_once('user-info.php');
 
 //This class' purpose is to perform queries related to the user
 class UserManager {
@@ -50,11 +51,9 @@ class UserManager {
     //This function's purpose is to display the user
     public function displayUser($user) {
 
-        $user_display = new User();
-
         foreach ($user as $user_entry) {
 
-            $user_display->display($user_entry);
+            display($user_entry);
         }
     }
 
@@ -158,8 +157,9 @@ class UserManager {
         $sql = "UPDATE user SET image = :image WHERE id = :id";
         $this->executeQuery($sql, [':id' => $id, ':image' =>$this->image]);
 
-        $_SESSION['image'] = $this->image;
-
+        //escapes special characters
+        $_SESSION['image'] = htmlspecialchars($this->image, ENT_QUOTES, 'UTF-8');
+        
         echo "<p class='text-success text-center'>You successfully updated your user avatar!</p>";
 
         $this->readById($id);
