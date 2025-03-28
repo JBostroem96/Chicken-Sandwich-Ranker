@@ -7,33 +7,12 @@
     require_once('headings.php');
     $heading = MR_SEARCH_HEADING;
 
-    require_once('UserManager.php');
-?>
-
-<!DOCTYPE html>
-<html>
-    <?php require_once('head.php'); ?>
+    require_once('head.php'); ?>
     
         <main class='mt-4'>
-            <?php require_once('heading.php'); 
-                
 
-                    if (empty($_SESSION['id']) && isset($_POST['login'])) {
+            <?php require_once('heading.php'); ?>
 
-                        $username = $_POST['username'];
-                        $password = $_POST['password'];
-
-                        $user_manager = new UserManager();
-
-                        $user_manager->logIn($username, $password);
-
-                    } else {
-
-                        "<h3><p class='text-danger'>you must enter a username and password</p></h3></hr>";
-                    }
-                    
-                    
-                ?>
                     <form class="needs-validation" novalidate method="GET" id="search-form"
                         action="chicken-sandwich-service.php">
                         <div class="text-white p-3">
@@ -54,20 +33,13 @@
                                 name="view-all">Search All
                             </button>
                             <br>
-                            <?php if(!isset($_SESSION['id'])) { ?>
-
-                                <p>Don't have an account? <a href='signup.php'>Sign up here!</a> 
-
-                                <?php
-                            }
-                                ?>
+                            
                     </form>
                    
         </main>
         
         <?php require_once("footer.php"); ?>        
-    </body>   
-</html>
+    
 
 
 

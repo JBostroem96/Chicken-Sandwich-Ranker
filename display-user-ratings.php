@@ -11,12 +11,9 @@
     <main class='mt-2'>
 
         <?php require_once('heading.php');               
-            
-            //This class' purpose is to display the user rating results
-            class UserRatingResults {
 
-                //This function's purpose is to display the user ratings
-                public function display($rating) {
+            //This function's purpose is to display the user ratings
+            function displayUserRatings($rating) {
                                                 
                     echo "<div class='rating'>" 
                         . "<form action='user-chicken-sandwich-service.php' method='POST'>
@@ -39,18 +36,13 @@
                         name='delete-entry' value='{$rating->getScore()}'>DELETE</button>"
                         . "<button class='button' type='submit' id='edit-entry'
                         name='edit-entry'>EDIT</button></form></div></div>";
-                }           
+            }           
                                 
-            }
-        
         ?> 
 
     </main>
 
-    <?php require_once("footer.php"); ?>
+    
 
-</body>  
-
-</html>
 
     

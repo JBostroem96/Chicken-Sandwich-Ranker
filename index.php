@@ -8,7 +8,6 @@
     require_once('headings.php');
     $heading = MR_HOME_HEADING;
 
-    require_once('UserManager.php');
 ?>
 
 <!DOCTYPE html>

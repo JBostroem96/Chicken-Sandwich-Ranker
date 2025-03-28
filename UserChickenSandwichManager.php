@@ -1,7 +1,7 @@
 <?php
 
 require_once('UserChickenSandwich.php');
-require_once('UserRatingResults.php');
+require_once('display-user-ratings.php');
 require_once('DB.php');
 
 /**
@@ -38,7 +38,7 @@ class UserChickenSandwichManager {
         foreach ($user_chicken_sandwich_entry as $chicken_data) {
 
 			//display ratings
-            (new UserRatingResults())->display($chicken_data);
+            displayUserRatings($chicken_data);
         }
     }
 
