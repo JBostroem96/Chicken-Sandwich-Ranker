@@ -3,7 +3,7 @@
 require_once('DB.php');
 require_once('image-file-util.php');
 require_once('logo-file-util.php');
-require_once('user-info.php');
+require_once('display-user-info.php');
 
 //This class' purpose is to perform queries related to the user
 class UserManager {
@@ -53,7 +53,7 @@ class UserManager {
 
         foreach ($user as $user_entry) {
 
-            display($user_entry);
+            displayUserInfo($user_entry);
         }
     }
 
