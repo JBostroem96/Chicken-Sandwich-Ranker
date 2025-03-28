@@ -9,16 +9,21 @@
 
 <!DOCTYPE html>
 <html>
-    <?php require_once('head.php'); ?>
-    
-        <main class='mt-2'>
-            <?php require_once('heading.php');          
+    <body>
+        <?php 
+        
+            require_once('head.php');
+        
             
-                //This class' purpose is to display the results for the chicken sandwich
-                class ChickenSandwichResults {
+            require_once('heading.php');   
 
-                    //display chicken sandwich and the permission-related features
-                    public function display($chicken_sandwich, $rank) {
+            //display chicken sandwich and the permission-related features
+            function displayChickenSandwichResults($chicken_sandwich, $rank) {
+        ?>
+
+                <main class='mt-2'>
+
+                    <?php
                         
                         echo "<h1>$rank.</h1>"
                             . "<div class='score'>" 
@@ -33,17 +38,18 @@
                             . "</td><td class='profile-details'><img src=" . $chicken_sandwich->getImage()  
                             . " class='image'" .
                                 "alt='chicken sandwhich'></td></tr><tr><td class='profile-details'>" 
-                            . "<h2>" . $chicken_sandwich->getName() . "</h2>"
+                            . "<h2>" 
+                            . $chicken_sandwich->getName() . "</h2>"
                             . " By: "
                             . "</td></tr><tr><td>";
-                                    
+                                        
                         if (isset($_SESSION['access_privileges'])) {
 
                             echo "<form action='chicken-sandwich-service.php' method='POST'>
                                 <input type='hidden' name='id' value='{$chicken_sandwich->getId()}'>
                                 <input type='numeric' name='score' pattern='[1-9]|10' required>
                                 <br><button class='button' type='submit' id='submit-score' value='{$chicken_sandwich->getName()}'
-                                    name='submit-score'>RATE ME!</button></form><p>Only 1-10 is allowed</p>";
+                                name='submit-score'>RATE ME!</button></form><p>Only 1-10 is allowed</p>";
 
                             if ($_SESSION['access_privileges'] == 'admin') {
 
@@ -60,13 +66,11 @@
                             . $chicken_sandwich->getSource() 
                             . '</td></tr>'              
                             .  "</form></table></div>'";                           
-                    }
-                }
-    
-            ?>  
-        </main>
+            }
+                    ?>  
+                </main>
 
-        <?php require_once("footer.php"); ?>
+            <?php require_once("footer.php"); ?>
 
     </body>   
 </html>
