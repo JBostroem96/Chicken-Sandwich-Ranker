@@ -1,20 +1,7 @@
 <?php 
-
-    require_once('page-titles.php');
-    $page_title = MR_USER_PAGE;
-
-    require_once('headings.php');
-    $heading = MR_USER_HEADING;
-?>
-
-<!DOCTYPE html>
-<html>
-<?php require_once('head.php'); ?>
-    <main class='mt-2'>
-
-        <?php require_once('heading.php');               
+         
        
-        class User {
+    class User {
 
             private $id;
             private $username;

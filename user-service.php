@@ -1,16 +1,18 @@
  
 <?php
 
-require_once('authorize-user-access.php');
+session_start();
 require_once('UserManager.php');
 require_once('User.php');
 require_once('UserChickenSandwichManager.php');
 require_once('ChickenSandwichManager.php');
 
+
 $http_verb = $_SERVER['REQUEST_METHOD'];
 $user_manager = new UserManager();
 $user_chicken_sandwich_manager = new UserChickenSandwichManager();
 $chicken_sandwich_manager = new ChickenSandwichManager();
+
 
 //Using the http verb ...
 switch ($http_verb) {
@@ -32,7 +34,17 @@ switch ($http_verb) {
 
             require_once('logout.php');
         
-        //If the user clicks on edit password
+        //If the user signs up
+        } elseif(isset($_POST['usernameLogIn']) && isset($_POST['passwordLogIn'])) {
+            
+            $user_manager->logIn($_POST['usernameLogIn'], $_POST['passwordLogIn']);
+
+        //If the user clicks on edit password    
+        } elseif(isset($_POST['username']) && isset($_POST['password'])) {
+            
+            $user_manager->signUp($_POST['username'], $_POST['password'], 'images/user.png');
+
+        //If the user clicks on edit password    
         } elseif(isset($_POST['password-to-change'])) {
 
             //Read use

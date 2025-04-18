@@ -168,7 +168,7 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to validate the chicken sandwich, ensuring the name doesn't already exist
-        public function validateChickenSandwich($name) {
+        public function cehckChickenSandwichExistence($name) {
 
             //Get the names
             $chicken_sandwiches = array_map(function($chicken_sandwich) {

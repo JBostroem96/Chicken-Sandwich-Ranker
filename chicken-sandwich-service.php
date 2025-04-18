@@ -50,7 +50,7 @@
 			} elseif(isset($_POST['enter-chicken-sandwich'])) {
 
 				//If it doesn't already exist ...
-				if ($chicken_sandwich_manager->validateChickenSandwich($_POST['name']) == false) {
+				if ($chicken_sandwich_manager->checkChickenSandwichExistence($_POST['name']) == false) {
 
 					$chicken_sandwich_manager->insertChickenSandwich($_POST['name'], $_POST['source']);
 				

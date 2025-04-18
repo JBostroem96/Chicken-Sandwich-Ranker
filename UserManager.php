@@ -67,7 +67,7 @@
         }
 
         //This function's purpose is to log in
-        public function login($username, $password) {
+        public function logIn($username, $password) {
 
             $results = $this->authenticate($username);
 
@@ -82,7 +82,7 @@
                         $_SESSION['access_privileges'] = $row['access_privileges'];
                         $_SESSION['image'] = $row['image'];
 
-                        return true;
+                        header("Location: index.php");
 
                     } else {
 
@@ -109,8 +109,7 @@
         }
 
         //This function's purpose is to sign the user up
-        public function signUp($username, $password, $show_sign_up_form, $image) {
-
+        public function signUp($username, $password, $image) {
             
             $results = $this->authenticate($username);
 
@@ -122,16 +121,17 @@
 
                 echo "<h4><p class='text-success'>Thank you for signing up <strong>$username</strong>! "
                     . "Your new account has been successfully created<br/>"
-                    . "You're now ready to <a href='index.php'>log in</a></p></h4>";
-
-                $show_sign_up_form = false;
+                    . "You're now ready to <a href='login.php'>log in</a></p></h4>";
 
             } else {
-
+                
                 echo "<h4><p class='text-danger'>An account already exists for this username: "
                     . "<span class='font-weight-bold'>($username)</span>. "
                     . "Please use a different user name.</p></h4></hr>";
+                
             }
+
+            
         }
 
         //This function's purpose is to delete the user
