@@ -4,16 +4,9 @@ require_once 'file-constants.php';
 
 
 /**
- * Purpose: Validates  an uploaded image file
- * 
- * Description: Validates an uploaded image file is not greater than ML_MAX_FILE_SIZE (1/2MB),
- * and is either a jpg or png image type, and has no errors. If the image file
- * validates to these contraints, an error message containing an empty string is 
- * returned. If there is an error, a string containing constraints the file failed
- * to validate to are returned.
- * 
- * @return string Empty if validation is successful, otherwise error string containing
- * constraints the image file failed to validate to. */
+ * This function's purpose is to validate the uploaded image by first checking that it's not empty,
+ * then checking for errors, then the size, and then the allowed types. If no errors are present, return empty string
+ */
 function validateImageFile() {
 
 
@@ -22,7 +15,7 @@ function validateImageFile() {
         return "You must upload an image.";
     }
 
-    //If there was an erro uploading said image
+    //If there was an error uploading said image
     if ($_FILES['image']['error'] !== UPLOAD_ERR_OK) {
         return "Error uploading image.";
     }
@@ -43,18 +36,11 @@ function validateImageFile() {
 
     return ""; // No errors
 }
-    /**
- * Purpose: Moves an uploaded image file to the ML_UPLOAD_PATH (images/)
- * folder and return the path location
- * 
- * Description: Moves an uploaded image file from the temporary server location
- * to the ML_UPLOAD_PATH (images/) folder IF an image file was uploaded
- * and returns the path location of the uploaded file by appending the file
- * name to the ML_UPLOAD_PATH (e.g. images/movie_image.png). IF an image
- * file was NOT uploaded, an empty string will be returned for the path.
- * 
- * @return string Path to image file IF a file was uploaded AND moved to the
- * ML_UPLOAD_PATH (images/) folder, otherwise and empty string */
+
+/**
+ * This function's purpose is to move the file from its temporary location to the intended destination that's been set, by
+ * first ensuring there was no upload error, and that the file type is allowed
+ */
 function addImageFileReturnPathLocation() {
 
     //If an issue arises, abort
