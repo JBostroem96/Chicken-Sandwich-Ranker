@@ -1,4 +1,4 @@
-<form enctype='multipart/form-data' class='needs-validation' novalidate method='POST'
+<form enctype='multipart/form-data' method='POST'
     action='user-service.php'>
                                 
     <div class='form-group'>

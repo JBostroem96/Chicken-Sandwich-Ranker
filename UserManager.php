@@ -154,6 +154,19 @@
 
             $this->validateImage();
 
+            if (!empty($this->image_error)) {
+
+                // Validation failed, show error and stop update
+                echo "<p class='text-danger text-center'>{$this->image_error}</p>";
+                return; // Stop execution so no DB update happens
+            }
+
+            if (empty($this->image)) {
+
+                echo "<p class='text-danger text-center'>There was an error uploading this image</p>";
+                return;
+            }
+
             $sql = "UPDATE user SET image = :image WHERE id = :id";
             $this->executeQuery($sql, [':id' => $id, ':image' =>$this->image]);
 
