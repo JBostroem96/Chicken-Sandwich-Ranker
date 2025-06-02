@@ -20,7 +20,7 @@
 
                 require_once('user-info.php');
 
-                require_once('user-account-buttons.php');
+                require_once('user-account-form.php');
 
             } else {
 

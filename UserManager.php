@@ -2,15 +2,17 @@
 
     require_once('DB.php');
     require_once('image-file-util.php');
-    require_once('logo-file-util.php');
+    require_once('profile-image-file-util.php');
     require_once('display-user-info.php');
 
     //This class' purpose is to perform queries related to the user
     class UserManager {
 
         private $db;
+        private $image;
+        private $image_error;
         private const CLASS_USER = 'User';
-
+        
         //This function's purpose is to be the constructor, which connects to the DB
         public function __construct() {
 
@@ -100,12 +102,29 @@
             }
         }
 
-        //This function's purpose is to validate images
-        public function validateImage() {
+        //This function's purpose is to validate the profile image
+        public function validateProfileImage() {
 
-            $this->image_error = validateImageFile();
-            $this->image = addImageFileReturnPathLocation();
-            
+            $error = false;
+            $profile_image = $_FILES['profile-image'];
+
+            $this->image_error = validateProfileImageFile($profile_image);
+            $this->image = addProfileImageFileReturnPathLocation($profile_image);
+
+            if (!empty($this->image_error)) {
+
+                
+                echo "<p class='text-danger text-center'>{$this->image_error}</p>";
+                $error = true;
+
+            } if (empty($this->image)) {
+
+                echo "<p class='text-danger text-center'>There was an error uploading this image</p>";
+                $error = true;
+            }
+
+            return $error;
+
         }
 
         //This function's purpose is to sign the user up
@@ -150,33 +169,27 @@
         }
 
         //This function's purpose is to update the user's image
-        public function updateImage($id) {
+        public function updateProfileImage($id) {
 
-            $this->validateImage();
+            if ($this->validateProfileImage()) {
 
-            if (!empty($this->image_error)) {
-
-                // Validation failed, show error and stop update
-                echo "<p class='text-danger text-center'>{$this->image_error}</p>";
-                return; // Stop execution so no DB update happens
-            }
-
-            if (empty($this->image)) {
-
-                echo "<p class='text-danger text-center'>There was an error uploading this image</p>";
                 return;
             }
 
             $sql = "UPDATE user SET image = :image WHERE id = :id";
-            $this->executeQuery($sql, [':id' => $id, ':image' =>$this->image]);
+
+            $this->executeQuery($sql, [':id' => $id, ':image' => $this->image]);
 
             //escapes special characters
             $_SESSION['image'] = htmlspecialchars($this->image, ENT_QUOTES, 'UTF-8');
-            
+                
             echo "<p class='text-success text-center'>You successfully updated your user avatar!</p>";
 
             $this->readById($id);
         }
+
+        
     }
+    
 
 ?>

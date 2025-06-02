@@ -43,7 +43,7 @@
             
     <div class="form-group">
         <label for="logo">Logo</label>
-        <input type="file" id="logo" name="logo" class="form-control" placeholder="logo" required>
+        <input type="file" name="logo" class="form-control" placeholder="logo" required>
         <div class="invalid-feedback">
             <p>Please provide a valid logo<p>
         </div> 

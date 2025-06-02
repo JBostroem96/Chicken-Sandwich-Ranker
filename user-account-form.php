@@ -3,7 +3,7 @@
                                 
     <div class='form-group'>
         <label for='image'>Image</label>
-        <input type='file' id='edit-image' name='image' class='form-control'
+        <input type='file' id='profile-image' name='profile-image' class='form-control'
         placeholder='image' required>
         <div class='invalid feedback'>
             <p>Please provide a valid image<p>

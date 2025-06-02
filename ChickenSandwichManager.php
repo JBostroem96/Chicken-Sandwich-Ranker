@@ -13,6 +13,10 @@ require_once('display-chicken-sandwich-results.php');
 
         private $db;
         private $rank = 0;
+        private $image;
+        private $logo;
+        private $image_error;
+        private $logo_error;
 
         //This function's purpose is to be the constructor, which connects to the DB
         public function __construct() {
@@ -114,8 +118,19 @@ require_once('display-chicken-sandwich-results.php');
             if ($chicken_sandwich) {
 
                 $entries = $chicken_sandwich->getEntries();
-                $new_score = $chicken_sandwich->getScore() - $score;
-                $average = $new_score / --$entries;
+
+                if ($entries <= 1) {
+
+                    $average = 0;
+                    $entries = 0;
+                    $new_score = 0;
+
+                } else {
+
+                    $entries--;
+                    $new_score = $chicken_sandwich->getScore() - $score;
+                    $average = $new_score / $entries;
+                }
 
                 $sql = "UPDATE chicken_sandwich SET score=:score, average=:average, entries=:entries WHERE id=:id";
                 $params = [':id' => $id, ':score' => $new_score, ':average' => $average, ':entries' => $entries];
@@ -124,20 +139,60 @@ require_once('display-chicken-sandwich-results.php');
             }
         }
 
-        //This function's purpose is to validate images
+        //This function's purpose is to validate the images
         public function validateImages() {
 
-            $this->image_error = validateImageFile();
-            $this->logo_error = validateLogo();
+            $error = false;
 
-            $this->image = addImageFileReturnPathLocation();
-            $this->logo = addLogoImageFileReturnPathLocation();
+            $image = $_FILES['image'];
+            $logo = $_FILES['logo'];
+
+            $this->image_error = validateImageFile($image);
+            $this->logo_error = validateLogoFile($logo);
+
+            $this->image = addImageFileReturnPathLocation($image);
+            $this->logo = addLogoFileReturnPathLocation($logo);
+
+            if (!empty($this->image_error)) {
+
+                echo "<p class='text-danger text-center'>{$this->image_error}</p>";
+                $error = true;
+            }
+
+            if (!empty($this->logo_error)) {
+
+                echo "<p class='text-danger text-center'>{$this->logo_error}</p>";
+                $error = true;
+            }
+
+            if (empty($this->image)) {
+
+                echo "<p class='text-danger text-center'>There was an error uploading this image</p>";
+                $error = true;
+            }
+
+            if (empty($this->logo)) {
+
+                echo "<p class='text-danger text-center'>There was an error uploading this logo</p>";
+                $error = true;
+            }
+
+            return $error;
         }
 
         //This function's purpose is to update the chicken sandwich
         public function update($id, $name, $source) {
 
-            $this->validateImages();
+            if ($this->validateChickenSandwich($name)) {
+
+                echo "Chicken sandwich with this name already exists.";
+                return;
+            }
+
+            if ($this->validateImages()) {
+
+                return;
+            }
 
             $sql = "UPDATE chicken_sandwich SET name=:name, logo=:logo, image=:image, source=:source WHERE id=:id";
             $params = [':id' => $id, ':name' => $name, ':logo' => $this->logo, ':image' => $this->image, ':source' => $source];
@@ -153,9 +208,13 @@ require_once('display-chicken-sandwich-results.php');
             if ($this->validateChickenSandwich($name)) {
 
                 echo "Chicken sandwich with this name already exists.";
+                return;
             }
 
-            $this->validateImages();
+            if ($this->validateImages()) {
+
+                return;
+            }
 
             $sql = "INSERT INTO chicken_sandwich (name, logo, image, source) VALUES (:name, :logo, :image, :source)";
             $params = [':name' => $name, ':logo' => $this->logo, ':image' => $this->image, ':source' => $source];
@@ -168,7 +227,7 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to validate the chicken sandwich, ensuring the name doesn't already exist
-        public function checkChickenSandwichExistence($name) {
+        public function validateChickenSandwich($name) {
 
             //Get the names
             $chicken_sandwiches = array_map(function($chicken_sandwich) {

@@ -26,7 +26,7 @@ switch ($http_verb) {
             foreach($user_chicken_sandwich_manager->readAll($_SESSION['id']) as $result) {
 
                 //Update the chicken sandwich score, passing over the chicken sandwich id and the user score
-                $chicken_sandwich_manager->updateScoreOnDeletionOfUser($result->getChickenId(), $result->getScore());
+                $chicken_sandwich_manager->updateScoreOnDeletionOfUser($result->getChickenSandwichId(), $result->getScore());
             }
 
             //Delete user
@@ -73,7 +73,7 @@ switch ($http_verb) {
 
         } elseif (isset($_POST['edit-image'])) {
 
-            $user_manager->updateImage($_SESSION['id']);
+            $user_manager->updateProfileImage($_SESSION['id']);
 
         } else {
 
