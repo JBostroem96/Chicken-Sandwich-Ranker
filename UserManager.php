@@ -187,9 +187,5 @@
 
             $this->readById($id);
         }
-
-        
     }
-    
-
 ?>
