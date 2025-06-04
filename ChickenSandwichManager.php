@@ -73,88 +73,63 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to display all chicken sandwiches
-        public function displayAllChickenSandwiches($user_chicken = null) {
+        public function displayAllChickenSandwiches($user_chicken_sandwich = null) {
+
+            //Check to see if there any ratings associated with the user
+            if ($user_chicken_sandwich !== null) {
+
+                $ratings = $this->findChickenSandwichRating($user_chicken_sandwich);
+            }
 
             foreach ($this->readAll() as $chicken_sandwich_data) {
 
                 $this->rank++;
-                $matchedEntry = null;
+                
+                //Assign any found ratings; if not, null.
+                $foundRating = $ratings[$chicken_sandwich_data->getId()] ?? null;
 
-                if ($user_chicken != null) {
-
-                    foreach ($user_chicken as $user_chicken_entry) {
-
-                        if ($user_chicken_entry->getChickenSandwichId() == $chicken_sandwich_data->getId()) {
-
-                            $matchedEntry = $user_chicken_entry;
-                            break;
-                        }
-                    }
-                }
-
-            displayChickenSandwichResults($chicken_sandwich_data, $this->rank, $matchedEntry);
-        }
-    }
-
-        //This function's purpose is to display the chicken sandwich
-        public function findChickenSandwich($chicken_sandwich_id, $user_chicken_sandwich = null) {
-
-            //loop through all sandwiches
-            foreach ($this->readAll() as $chicken_sandwich) {
-
-                // to determine its rank
-                $this->rank++;
-
-                //if submitted chicken sandwich matches any of the entries
-                if ($chicken_sandwich->getId() == $chicken_sandwich_id) {
-
-                    $this->displayReviewedChickenSandwich($user_chicken_sandwich, $chicken_sandwich);
-                    
-                }
+                displayChickenSandwichResults($chicken_sandwich_data, $this->rank, $foundRating);
             }
         }
 
-        //This function's purpose is to display the chicken sandwich that was just rated
-        public function displayReviewedChickenSandwich($user_chicken_sandwich, $chicken_sandwich) {
+        //this function's purpose is to find the user's rated chicken sandwiches
+        public function findChickenSandwichRating($user_chicken_sandwich): array {
 
-            if ($user_chicken_sandwich !== null) {
+            //prepare ratings
+            $ratings = [];
 
-                foreach ($user_chicken_sandwich as $user_chicken_entry) {
+            foreach ($user_chicken_sandwich as $user_chicken_entry) {
 
-                    if ($user_chicken_entry !== null) {
+                //assign the ratings
+                $ratings[$user_chicken_entry->getChickenSandwichId()] = $user_chicken_entry;
 
-                        //display it
-                        displayChickenSandwichResults($chicken_sandwich, $this->rank, $user_chicken_entry);
-                    }
-                    
-                }
-
-            } else {
-
-                //display it even if the user has already rated it
-                displayChickenSandwichResults($chicken_sandwich, $this->rank, null);
             }
-               
+
+            return $ratings;
         }
+
 
         //This function's purpose is to update the score
         public function updateScore($chicken_sandwich, $chicken_sandwich_score, $entries, $new_score) {
 
-            
             $entries++;
             $new_score += $chicken_sandwich_score;
             $average = $new_score / $entries;
-
-            $user_chicken_sandwich_manager = new UserChickenSandwichManager();
 
             $sql = "UPDATE chicken_sandwich SET score=:score, average=:average, entries=:entries WHERE id=:id";
             $params = [':id' => $chicken_sandwich, ':score' => $new_score, ':average' => $average, ':entries' => $entries];
 
             $this->executeQuery($sql, $params, false);
-
-            $user_chicken_sandwich = $user_chicken_sandwich_manager->readById($_SESSION['id'], $chicken_sandwich);
             
-            $this->findChickenSandwich($chicken_sandwich, $user_chicken_sandwich);
+            $this->displayAllChickenSandwiches($this->getUserChickenSandwiches());
+
+        } 
+
+
+        //this function's purpose is to return the user's chicken sandwiches
+        public function getUserChickenSandwiches() {
+
+            return (new UserChickenSandwichManager())->readAll($_SESSION['id']);
         }
 
         //This function's purpose is to update the score on the deletion of entry by user
@@ -246,7 +221,7 @@ require_once('display-chicken-sandwich-results.php');
 
             $this->executeQuery($sql, $params, false);
 
-            $this->displayChickenSandwich($id);
+            $this->displayAllChickenSandwiches($this->getUserChickenSandwiches());
         }
 
         //This function's purpose is to insert a new chicken sandwich
@@ -268,9 +243,7 @@ require_once('display-chicken-sandwich-results.php');
 
             $this->executeQuery($sql, $params, false);
 
-            $lastInsertedId = $this->db->lastInsertId();
-
-            $this->displayChickenSandwich($lastInsertedId);
+            $this->displayAllChickenSandwiches($this->getUserChickenSandwiches());
         }
 
         //This function's purpose is to validate the chicken sandwich, ensuring the name doesn't already exist
@@ -294,7 +267,7 @@ require_once('display-chicken-sandwich-results.php');
             $params = [':id' => $id];
             $this->executeQuery($sql, $params, false);
 
-            $this->displayAllChickenSandwiches();
+            $this->displayAllChickenSandwiches($this->getUserChickenSandwiches());
         }
     }
 ?>

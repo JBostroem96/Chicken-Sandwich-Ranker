@@ -18,6 +18,8 @@
 			//If the user submits a new sandwich ...
 			if (isset($_POST['enter-chicken-sandwich'])) {
 
+				$user_chicken_sandwich = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
+
 				//If it doesn't already exist ...
 				if ($chicken_sandwich_manager->validateChickenSandwich($_POST['name']) == false) {
 
@@ -73,16 +75,13 @@
 
 					if (isset($_SESSION['id'])) {
 
-						$user_chicken = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
-						$chicken_sandwich_manager->displayAllChickenSandwiches($user_chicken);
+						$chicken_sandwich_manager->displayAllChickenSandwiches($chicken_sandwich_manager->getUserChickenSandwiches());
 
 					} else {
 
-						
 						$chicken_sandwich_manager->displayAllChickenSandwiches();
 					}
-			
-                    
+					  
 				//If a specifc sandwich is being searched ...
 				} elseif (isset($_GET['search-term']) AND isset($_GET['search-type'])) {	
 					
