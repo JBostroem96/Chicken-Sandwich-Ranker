@@ -18,6 +18,7 @@ class UserChickenSandwichManager {
         $this->db = (new DB())->connect();
     }
 
+    
    	//this function's purpose is to read all of a user's entries
     public function readAll($user_id) {
 
@@ -126,14 +127,15 @@ class UserChickenSandwichManager {
     }
 
     // this function's purpose is to insert the user rating for a given chicken sandwich
-    public function setRating($user_id, $chicken_sandwich_id, $score, $name) {
+    public function setReview($user_id, $chicken_sandwich_id, $score, $name, $review = null) {
 
-        $sql = "INSERT INTO user_chicken_sandwich (user_id, chicken_id, score, name) VALUES (:user, :chicken, :score, :name)";
-        $params = [':user' => $user_id, ':chicken' => $chicken_sandwich_id, ':score' => $score, ':name' => $name];
+        $sql = "INSERT INTO user_chicken_sandwich (user_id, chicken_id, score, name, review) VALUES (:user, :chicken, :score, :name, :review)";
+        $params = [':user' => $user_id, ':chicken' => $chicken_sandwich_id, ':score' => $score, ':name' => $name, ':review' => $review];
         $this->executeQuery($sql, $params);
 
         return $chicken_sandwich_id;
     }
+
 
     // this function's purpose is to execute the query and return results as objects of specified class
     private function executeQuery($sql, $params = [], $class = null) {

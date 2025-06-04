@@ -14,13 +14,53 @@ switch ($http_verb) {
 
     case "POST":
         
-        //If a score is being deleted
-        if (isset($_POST['delete-entry'])) {
+        //If a new score is submitted ...
+		if (isset($_POST['submit-score']))  {
+				
+			$score = $_POST['score'];
+				
+			//Validates that the submitted score is an int and that its score is between 1 and 10
+			if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
+                
+				//if the user has not rated this yet ...
+				if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
 
+					$chicken_sandwich = $_POST['id'];
+                    
+					$name = $_POST['submit-score'];
+
+					if (isset($_POST['review'])) {
+
+                        $user_chicken_sandwich_manager->setReview($_SESSION['id'], $chicken_sandwich, $score, $name, $_POST['review']);
+					    
+                    } else {
+
+                        $user_chicken_sandwich_manager->setReview($_SESSION['id'], $chicken_sandwich, $score, $name, null);
+                    }
+
+                    $chicken_sandwich_manager->getChickenSandwichScore($chicken_sandwich, $score);
+					
+				//otherwise ...
+				} else {
+
+					echo "<p class='text-center text-danger'>You have already rated this chicken</p>";
+					$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
+						
+				}	
+
+			} else {
+
+				echo "<p class='text-center text-danger'>Only 1-10 are allowed.</p>";
+				$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
+			}
+        
             
+        //If a score is being deleted
+        } elseif (isset($_POST['delete-entry'])) {
+
             $user_chicken_sandwich_manager->delete($_SESSION['id'], $_POST['chicken-sandwich-id']);
             $chicken_sandwich = $chicken_sandwich_manager->getChickenSandwich($_POST['chicken-sandwich-id']);
-            
+                
             $user_chicken_sandwich_manager->updateScoreOnDelete($chicken_sandwich, $_POST['delete-entry'], $_SESSION['id']);  
             
         //If the user edits their entry ...

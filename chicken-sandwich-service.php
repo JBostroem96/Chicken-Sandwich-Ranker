@@ -14,40 +14,9 @@
 	switch ($http_verb) {
 
 		case "POST":
-			
-			//If a new score is submitted ...
-			if (isset($_POST['submit-score'])) {
-				
-				$score = $_POST['score'];
-				
-				//Validates that the submitted score is an int and that its score is between 1 and 10
-				if (filter_var($score, FILTER_VALIDATE_INT) && $score >= 1 && $score <= 10) {
-
-					//if the user has not rated this yet ...
-					if ($user_chicken_sandwich_manager->findRating($_SESSION['id'], $_POST['id']) == false) {
-
-						$chicken_id = $_POST['id'];
-						$name = $_POST['submit-score'];
-
-						$user_chicken_sandwich_manager->setRating($_SESSION['id'], $chicken_id, $score, $name);
-						$chicken_sandwich_manager->getChickenSandwichScore($chicken_id, $score);
-					
-					//otherwise ...
-					} else {
-
-						echo "<p class='text-center text-danger'>You have already rated this chicken</p>";
-						$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
-						
-					}	
-
-				} else {
-
-					echo "<p class='text-center text-danger'>Only 1-10 are allowed.</p>";
-					$chicken_sandwich_manager->displayChickenSandwich($_POST['id']);
-				}
 		
 			//If the user submits a new sandwich ...
-			} elseif(isset($_POST['enter-chicken-sandwich'])) {
+			if (isset($_POST['enter-chicken-sandwich'])) {
 
 				//If it doesn't already exist ...
 				if ($chicken_sandwich_manager->validateChickenSandwich($_POST['name']) == false) {
@@ -102,8 +71,18 @@
 				//If all sandwiches are being searched ...
 				if (isset($_GET['view-all'])) {
 
-                    $chicken_sandwich_manager->displayAllChickenSandwiches();
-				
+					if (isset($_SESSION['id'])) {
+
+						$user_chicken = $user_chicken_sandwich_manager->readAll($_SESSION['id']);
+						$chicken_sandwich_manager->displayAllChickenSandwiches($user_chicken);
+
+					} else {
+
+						
+						$chicken_sandwich_manager->displayAllChickenSandwiches();
+					}
+			
+                    
 				//If a specifc sandwich is being searched ...
 				} elseif (isset($_GET['search-term']) AND isset($_GET['search-type'])) {	
 					
