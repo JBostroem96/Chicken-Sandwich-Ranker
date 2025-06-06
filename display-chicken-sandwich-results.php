@@ -11,7 +11,7 @@
     require_once('heading.php');
 
     //display chicken sandwich and the permission-related features
-    function displayChickenSandwichResults($chicken_sandwich, $rank, $user_chicken = null) {
+    function displayChickenSandwichResults($chicken_sandwich, $rank, $foundRating = null) {
                               
         echo "<h2>$rank.</h2>"
             . "<div class='score'>" 
@@ -33,7 +33,7 @@
                                                 
         if (isset($_SESSION['access_privileges'])) {
 
-            if ($user_chicken == null || $user_chicken->getChickenSandwichId() != $chicken_sandwich->getId()) {
+            if ($foundRating == null || $foundRating->getChickenSandwichId() != $chicken_sandwich->getId()) {
 
                 echo "<form action='user-chicken-sandwich-service.php' method='POST'>
                 <input type='hidden' name='id' value='{$chicken_sandwich->getId()}'>

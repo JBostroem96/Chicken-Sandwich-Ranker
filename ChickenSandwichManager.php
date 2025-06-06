@@ -18,6 +18,7 @@ require_once('display-chicken-sandwich-results.php');
         private $logo;
         private $image_error;
         private $logo_error;
+        private $foundRating;
 
         //This function's purpose is to be the constructor, which connects to the DB
         public function __construct() {
@@ -73,27 +74,61 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to display all chicken sandwiches
-        public function displayAllChickenSandwiches($user_chicken_sandwich = null) {
+        public function displayAllChickenSandwiches($ratings = null, $search_term = null, $search_type = null) {
 
-            //Check to see if there any ratings associated with the user
-            if ($user_chicken_sandwich !== null) {
-
-                $ratings = $this->findChickenSandwichRating($user_chicken_sandwich);
-            }
-
-            foreach ($this->readAll() as $chicken_sandwich_data) {
+            foreach ($this->readAll() as $chicken_sandwich) {
 
                 $this->rank++;
                 
-                //Assign any found ratings; if not, null.
-                $foundRating = $ratings[$chicken_sandwich_data->getId()] ?? null;
+                if ($ratings !== null) {
 
-                displayChickenSandwichResults($chicken_sandwich_data, $this->rank, $foundRating);
+                    $this->foundRating = $ratings[$chicken_sandwich->getId()] ?? null;
+                } 
+
+                if (isset($search_term) && isset($search_type)) {
+
+                    $this->searchChickenSandwich($chicken_sandwich, $search_term, $search_type);
+
+                } else {
+
+                    displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+
+                }
             }
         }
 
+        //this function's purpose is to search the chicken sandwich by search term
+        public function searchChickenSandwich($chicken_sandwich, $search_term, $search_type) {
+            
+            //using the search type ...
+			switch ($search_type) {
+
+				//If it equals a name search ...
+				case 'name':
+
+				    if ($chicken_sandwich->getName() === $search_term) {
+
+						displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+					}
+
+					break;
+
+				//else, if it equals a 'score' search ...
+				case 'score':
+
+					if ($chicken_sandwich->getScore() == $search_term) {
+
+						displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+					}
+
+					break;
+            }
+
+        }
+            
+
         //this function's purpose is to find the user's rated chicken sandwiches
-        public function findChickenSandwichRating($user_chicken_sandwich): array {
+        public function findChickenSandwichRatings($user_chicken_sandwich): array {
 
             //prepare ratings
             $ratings = [];
@@ -102,10 +137,23 @@ require_once('display-chicken-sandwich-results.php');
 
                 //assign the ratings
                 $ratings[$user_chicken_entry->getChickenSandwichId()] = $user_chicken_entry;
-
             }
 
             return $ratings;
+        }
+
+
+        public function assignRating() {
+
+            foreach ($this->readAll() as $chicken_sandwich) {
+
+                $this->rank++;
+                
+                //Assign any found ratings; if not, null.
+                $foundRating = $ratings[$chicken_sandwich->getId()] ?? null;
+
+                displayChickenSandwichResults($chicken_sandwich, $this->rank, $foundRating);
+            }
         }
 
 
@@ -203,13 +251,7 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to update the chicken sandwich
-        public function update($id, $name, $source) {
-
-            if ($this->validateChickenSandwich($name)) {
-
-                echo "Chicken sandwich with this name already exists.";
-                return;
-            }
+        public function updateChickenSandwich($id, $name, $source) {
 
             if ($this->validateImages()) {
 
@@ -227,12 +269,6 @@ require_once('display-chicken-sandwich-results.php');
         //This function's purpose is to insert a new chicken sandwich
         public function insertChickenSandwich($name, $source) {
 
-            if ($this->validateChickenSandwich($name)) {
-
-                echo "Chicken sandwich with this name already exists.";
-                return;
-            }
-
             if ($this->validateImages()) {
 
                 return;
@@ -247,7 +283,7 @@ require_once('display-chicken-sandwich-results.php');
         }
 
         //This function's purpose is to validate the chicken sandwich, ensuring the name doesn't already exist
-        public function validateChickenSandwich($name) {
+        public function checkMatchingChickenSandwichName($name) {
 
             //Get the names
             $chicken_sandwiches = array_map(function($chicken_sandwich) {

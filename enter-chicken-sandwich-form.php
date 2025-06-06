@@ -1,6 +1,6 @@
 <?php 
 
-    if(isset($_POST['id'])) {
+    if (isset($_POST['id'])) {
         ?> <h1>Update Chicken Id <?php echo $_POST['id']; ?> </h1> <?php
 
     } else {
@@ -49,12 +49,16 @@
         </div> 
     </div>
 
-    <button class="button" type="submit" <?php if (isset($_POST['edit-chicken-sandwich']) || isset($_POST['id'])) { ?> name="<?php echo 'id'; ?>" value="<?php echo $_POST['id']?>" <?php } else {
+    <button class="button" type="submit" <?php if (isset($_POST['edit-chicken-sandwich']) || isset($_POST['id'])) { ?> name="<?php echo 'chicken-sandwich-update'; ?>" value="<?php echo $_POST['id']?>" <?php } else {
         ?> name="enter-chicken-sandwich"<?php
         } ?>>Submit Chicken
     </button>
 </form>
+<?php if (isset($_POST['enter-chicken-sandwich']) || isset($_POST['chicken-sandwich-update'])) {
 
+        echo "<p class='text-danger fw-bold'>That entry already exists</p>";
+    } 
+?>
 <script src="js/formValidation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>       
         
