@@ -13,12 +13,10 @@ require_once('display-chicken-sandwich-results.php');
     class ChickenSandwichManager {
 
         private $db;
-        private $rank = 0;
         private $image;
         private $logo;
         private $image_error;
         private $logo_error;
-        private $foundRating;
 
         //This function's purpose is to be the constructor, which connects to the DB
         public function __construct() {
@@ -76,29 +74,32 @@ require_once('display-chicken-sandwich-results.php');
         //This function's purpose is to display all chicken sandwiches
         public function displayAllChickenSandwiches($ratings = null, $search_term = null, $search_type = null) {
 
+            $rank = 0;
+            $foundRating = null;
+
             foreach ($this->readAll() as $chicken_sandwich) {
 
-                $this->rank++;
+                $rank++;
                 
                 if ($ratings !== null) {
 
-                    $this->foundRating = $ratings[$chicken_sandwich->getId()] ?? null;
+                    $foundRating = $ratings[$chicken_sandwich->getId()] ?? null;
                 } 
 
                 if (isset($search_term) && isset($search_type)) {
 
-                    $this->searchChickenSandwich($chicken_sandwich, $search_term, $search_type);
+                    $this->searchChickenSandwich($chicken_sandwich, $search_term, $search_type, $rank, $foundRating);
 
                 } else {
 
-                    displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+                    displayChickenSandwichResults($chicken_sandwich, $rank, $foundRating);
 
                 }
             }
         }
 
         //this function's purpose is to search the chicken sandwich by search term
-        public function searchChickenSandwich($chicken_sandwich, $search_term, $search_type) {
+        public function searchChickenSandwich($chicken_sandwich, $search_term, $search_type, $rank, $foundRating) {
             
             //using the search type ...
 			switch ($search_type) {
@@ -108,7 +109,7 @@ require_once('display-chicken-sandwich-results.php');
 
 				    if ($chicken_sandwich->getName() === $search_term) {
 
-						displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+						displayChickenSandwichResults($chicken_sandwich, $rank, $foundRating);
 					}
 
 					break;
@@ -118,7 +119,7 @@ require_once('display-chicken-sandwich-results.php');
 
 					if ($chicken_sandwich->getScore() == $search_term) {
 
-						displayChickenSandwichResults($chicken_sandwich, $this->rank, $this->foundRating);
+						displayChickenSandwichResults($chicken_sandwich, $rank, $foundRating);
 					}
 
 					break;
@@ -141,21 +142,6 @@ require_once('display-chicken-sandwich-results.php');
 
             return $ratings;
         }
-
-
-        public function assignRating() {
-
-            foreach ($this->readAll() as $chicken_sandwich) {
-
-                $this->rank++;
-                
-                //Assign any found ratings; if not, null.
-                $foundRating = $ratings[$chicken_sandwich->getId()] ?? null;
-
-                displayChickenSandwichResults($chicken_sandwich, $this->rank, $foundRating);
-            }
-        }
-
 
         //This function's purpose is to update the score
         public function updateScore($chicken_sandwich, $chicken_sandwich_score, $entries, $new_score) {
